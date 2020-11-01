@@ -1,0 +1,121 @@
+1.数据库介绍
+
+
+2.MongoDB的初体验
+
+
+3.图形化工具Studio 3T基本使用说明
+
+
+4.MongoDB的基本操作CRUD
+  1.C - create 增加
+    1.1 db.<collection>.insert(插入的数据)
+    1.2 db:当前锁在的数据库(切换数据库使用  use 数据库名称 )
+    1.3 collection:指定的集合名称,如果输入的集合不存在,会自动创建一个同名的集合
+    1.4 insert()向集合中插入一条或者多条数据(插入一条数据用对象,多条数据用数组,数组内部是对象)
+
+  2.R - read  查询
+    2.1 db.<collection>.find(查询的条件)  ------>  查找并数据所有满足条件的文档记录
+          db.<collection>.findOne(查询的条件)  ------>  查找并数据第一条满足条件的文档记录
+          注:如果不输入查询条件,默认输出所有文档记录
+    2.2  运算符
+          大于($gt)  大于等于($gte)  小于($lt)  小于等于($lte)  不等于($ne)
+    2.3  条件规则
+          $or 查询多个字段的情况,符合其中一个即可
+          $in  查询一个字段的多种情况,符合其中一个即可
+          $nin 与$in相反
+          $where  跟函数,函数返回值为true,就算是符合要求(可以实现多种情况的条件判断)
+	语法:{$where:function(){}}
+    2.4  投影
+          1).db.<collection>.find(查询条件,投影)
+          2)投影就是过滤的条件
+          3)对查询到的数据的字段进行过滤,保留需要的字段
+    2.5  模糊查询:正则
+           db.<collection>.find({name:/小/})
+
+  3.U - update  更新
+    3.1  db.<collection>.updateOne(查询条件,更新内容)  ------>  修改某条文档记录
+           db.<collection>.updateMany(查询条件,更新内容)  ------>  批量修改文档记录
+     3.2 更新修饰符
+            $set  -->  db.<collection>.updateOne({name:"小明"},{$set:{age:25}})  ------>  将name为小明的文档记录中的age值改为25
+            $inc  -->  db.<collection>.updateMany({},{$inc:{age:1}})  ------>  将所有的文档记录中的age值加1
+
+  4.D - delete  删除
+    4.1  db.<collection>.remove(查询条件)  ------>  删除某条文档记录
+           db.<collection>.drop()  ------>  删除某个集合
+           db.dropDatabase()  ------>  删除某个数据库
+           注意:在实际开发中,由于数据非常宝贵,我们一般宁愿添加十条,也不愿删除一条
+    4.2  软删除
+           给所有文档记录都添加一个字段,用于标记当前该条文档记录是否应该被删除
+
+
+5.mongoose的基本使用
+  1.使用流程
+	1)在项目中下载mongoose
+	2)引入mongoose
+	3)连接数据库(通过mongoose提供的connect方法连接数据库)
+	4)通过mongoose.connection.once()监听连接数据库是否成功
+	5)创建Schema对象(约束对象),声明该集合内部每个字段的配置
+		语法:new Mongoose.Schema(字段配置对象)
+			type声明当前字段值的类型
+			required声明当前字段值是否必传
+			unique声明当前字段值是否可以重复
+			default声明当前字段值的默认值
+			mongoose.SchemaTypes.Mixed声明当前字段值的类型为任意类型(混合)
+			[String]声明当前字段值的类型必须是数组,内部数据的类型必须是字符串
+	6)创建模型对象(Model)
+		语法:const studentsModel = mongoose.model(集合名称,约束对象)
+	7)创建文档对象
+		语法:const studentA = new studentsModel(传入所需的配置对象)
+	8)将文档对象保存至集合中
+		语法:studentA.save()  ->  返回值为Promise对象
+
+
+6.通过model对象进行CRUD操作
+  1.模仿5-2使用流程中的前6步,得到模型对象(StarsModel)
+  2.使用语法
+	1)添加:
+	           StarsModel.create(字段值对象)
+	2)查找:
+	           StarsModel.find(字段值对象)	
+	           StarsModel.findOne(字段值对象)
+	3)修改:
+	           StarsModel.updateOne({name:"小明"},{$set:{age:25}})  ------>  将name为小明的文档记录中的age值改为25
+	           StarsModel.updateMany({},{$inc:{age:1}})  ------>  将所有的文档记录中的age值加1
+	4)删除:
+	           StarsModel.remove({name:"小明"})  ------>  删除name值为小明的文档对象
+	           StarsModel.updateMany({name:"小明"},{$set:{isDeleted:false}})  ------>  软删除
+
+7.集合之间建立关联,并填充信息
+  1.首先创建存储所有老师信息的集合(teachers集合)
+     每个老师都拥有名字和性别字段
+  2.创建所有班级信息的集合(classes集合)
+     每个班级都拥有班级名称和对应老师字段
+           由于每个班级有对应的老师,所以需要用到老师的信息,但是老师的信息在teachers集合中已经存在,
+    再存储一份过于冗余,所以我们要将classes集合与teachers集合进行关联
+	关联语法:
+		通过ref属性声明teacherId字段与teachers集合中的_id字段相对应
+		{
+		    className:{
+        			type:String,
+        			unique:true,
+        			required:true
+            		     },
+        		    teacherId:{
+        			type:mongoose.Schema.Types.ObjectId,
+        			ref:"teachers"
+            		     }
+		}
+	填充语法:
+		由于我们与已经通过classes集合中的teacherId与teachers集合进行关联
+		输出信息时,可以通过填充语法将对应老师信息一并输出
+		classesModel.find({},{_id:0,__v:0})
+    		    .populate('teacherId',{_id:0,__v:0})
+    		    .then((res)=>{
+        			console.log(res)
+    		    })
+
+7.mongoose模块化
+
+		
+
