@@ -1,0 +1,37 @@
+use 数据库名称
+use test
+
+C->create->创建
+db.<collection>.insert(插入的文档对象或者对象组成的数组)
+db->数据库,database
+collection->集合名称,随便取名
+document->文档对象,数据记录
+
+创建数据库流程->先切换到你想要的数据库(use)->对某个集合内部插入数据,会自动创建数据库和集合
+
+R->read->读取
+db.collection.find(查询条件对象(Query))	->	Array.prototype.filter
+db.collection.findOne(查询条件对象(Query))	->	Array.prototype.find
+如果Query不传或者传入空对象,都是代表查看当前集合所有的数据
+
+1.条件符
+$in	->	一个属性有多种条件,满足其中任意一个条件,就可以
+$nin	->	一个属性有多种条件,内部条件都不满足,就可以
+$or	->	多个属性有多种条件,满足任意一个就可以
+$and	->	多个属性有多种条件,内部条件都满足,才可以
+$where	->	可以自定义一个函数,返回值为true就代表满足条件,this存放着当前的文档对象
+
+2.比较符
+大于($gt)	大于等于($gte)	小于($lt)	小于等于($lte)	不等于($ne)
+
+3.模糊查询
+通过正则表达式进行模糊查询
+
+
+
+
+
+
+U->update->更新
+
+D->delete->删除
