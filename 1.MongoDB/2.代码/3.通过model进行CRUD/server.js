@@ -9,8 +9,7 @@ const mongoose = require('mongoose');
 */
 mongoose.connect("mongodb://localhost:27017/stars",{ 
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex:true
+    useUnifiedTopology: true
 },function(err){
     if(err){
         console.log(err)
@@ -46,18 +45,6 @@ const starsSchema = new mongoose.Schema({
     info:mongoose.Schema.Types.Mixed    //当前字段的属性值可以为任意值
 })
 
-const classesSchema = new mongoose.Schema({
-    className:{
-        type:String,
-        unique:true,
-        required:true
-    },
-    teacherId:{
-        ref:"stars",
-        type:mongoose.Schema.Types.ObjectId
-    }
-})
-
 /*
     第三步:创建模型对象(集合实例对象)
     const starsModel = mongoose.model(集合名称,约束对象)
@@ -65,33 +52,18 @@ const classesSchema = new mongoose.Schema({
 */
 const starsModel = mongoose.model('stars',starsSchema);
 
-const classesModel = mongoose.model('teachers',classesSchema);
-
 /*
     第四步:通过模型对象进行CRUD
 */
 
-// starsModel.update({name:"彭于晏"},{
-//     name:"彭于晏",
-//     age:27.99,
-//     sex:"猛男",
-//     roles:["唐钰小宝"],
-//     info:"舔狗不得好死"
-// },{upsert:true})
-// .then((msg)=>{
-//     console.log(msg)
-// })
-
-// classesModel.create({
-//     className:"sz200610",
-//     teacherId:"5f9fb91d58f00613407ce3ea"
-// })
-// .then((msg)=>{
-//     console.log(msg)
-// })
-
-classesModel.find({className:"sz200610"},{_id:0,__v:0})
-.populate('teacherId',{_id:0,__v:0})
+starsModel.update({name:"彭于晏"},{
+    name:"彭于晏",
+    age:27.99,
+    sex:"猛男",
+    roles:["唐钰小宝"],
+    info:"舔狗不得好死"
+},{upsert:true})
 .then((msg)=>{
     console.log(msg)
 })
+
