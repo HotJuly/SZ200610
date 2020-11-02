@@ -101,7 +101,7 @@
 			required声明当前字段值是否必传
 			unique声明当前字段值是否可以重复
 			default声明当前字段值的默认值
-			mongoose.SchemaTypes.Mixed声明当前字段值的类型为任意类型(混合)
+			mongoose.Schema.Types.Mixed声明当前字段值的类型为任意类型(混合)
 			[String]声明当前字段值的类型必须是数组,内部数据的类型必须是字符串
 	6)创建模型对象(Model)
 		语法:const studentsModel = mongoose.model(集合名称,约束对象)
