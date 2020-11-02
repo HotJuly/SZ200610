@@ -39,7 +39,7 @@ const starsSchema = new mongoose.Schema({
     age:Number,
     sex:{
         type:String,
-        default:"未知"
+        default:"未知"  //当前字段如果不传数据,默认值为未知
     },
     roles:[String],      //当前字段数据类型必须是数组,内部数据类型必须是字符串,
     info:mongoose.Schema.Types.Mixed    //当前字段的属性值可以为任意值
@@ -48,7 +48,7 @@ const starsSchema = new mongoose.Schema({
 /*
     第三步:创建模型对象(集合实例对象)
     const starsModel = mongoose.model(集合名称,约束对象)
-    官方声明集合名称可以是单数也可以是复数,但是->经过实测写单数会出问题
+    官方声明集合名称可以是单数也可以是复数,但是->经过实测写单数会出问题,会自动添加s
 */
 const starsModel = mongoose.model('stars',starsSchema);
 
