@@ -40,5 +40,26 @@ options中的属性名是你要筛选的属性名(字段名),属性值可以是0
 
 
 U->update->更新
+db.collection.updateOne(Query对象,更新数据对象)//至少两个参数
+db.collection.updateMany(Query对象,更新数据对象)
+
+$set->设置字段值
+$inc->对某个字段值进行增加(可以为正数或者负数)
+$rename->对某个字段名进行重命名
+$unset
+
+最新API:db.collection.update(Query对象,更新数据对象,配置对象(options))
+options->
+upsert	->	如果查找不到满足条件的文档对象,是否自动插入(true为插入,false为不插入,默认false)
+multi	->	为true相当于updateMany,为false相当于updateOne
 
 D->delete->删除
+db.collection.remove(Query对象)	->	删除满足条件的对象
+
+软删除
+在真实开发中,我们宁愿增加十条数据,也不愿意删除一条
+db.students.updateMany({studentName:"老王"},{$set:{isdelete:true}})
+
+db.students.updateMany({},{$set:{isdelete:false}})
+
+db.students.find({isdelete:false})
