@@ -38,3 +38,6 @@ db.students.find({$where:function(){return this.age-1<37}})
 //查询name中有"小"字的文档对象,^以什么开头,$以什么结尾
 db.students.insert({name:"大小",age:33})
 db.students.find({name:/小$/})
+
+//查询name为小明的文档对象,并返回他的name值,不返回age
+db.students.find({name:"小明"},{name:1,_id:0})
