@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <img id="avatarImg" style="width:100px;height:100px" alt="">
+        <label for="#file">上传头像:</label><input type="file" id="file">
+    </div>
+    <div>
+        <label for="#username">用户名:</label><input type="text" id="username">
+    </div>
+    <div>
+        <label for="#password">密码:</label><input type="text" id="password">
+    </div>
+    <button id="btn">提交</button>
+    <script>
+        let formdata= new FormData();
+        file.onchange=async function(){
+            console.log(this.files[0])
+            const image =this.files[0];
+            formdata.append('file',image);
+            let result = await axios.post('http://localhost:3000/upload',formdata);
+            avatarImg.src="http://localhost:3000"+result.data;
+            // const img= new Image();
+            // img.src="http://localhost:3000"+result.data;
+            // img.width="100";
+            // img.height="100";
+            // avatarImg.appendChild(img)
+        }
+
+    </script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+</body>
+</html>
