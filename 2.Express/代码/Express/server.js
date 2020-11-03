@@ -15,11 +15,20 @@ const app = express();  //  app ->  application
     回调函数接收两个参数:
         1.request   ->  请求报文对象(存放着所有跟请求相关的数据)
         2.response  ->  响应报文对象(存放着所有跟响应相关的数据)
+            response的常用API
+                1.response.end(数据)    ->  将原数据返回给前端
+                2.response.send(数据)   ->  根据当前返回的数据类型,自动设置响应头的文件类型content-type
+                3.response.json(数据)   ->  自动设置响应头的文件类型为json,并返回数据
+                4.response.redirect()    ->  当用户请求该路由时,重定向到指定路由
+                5.response.set()    ->  用于配置响应报文对象
+                6.response.status()     ->用于指定当前响应的状态码,注意:设置完之后还需要返回响应
+                7.response.cookie()     ->  用于设置cookie
     注意:
         1.每个路由路径都可以被不同的请求方式重复注册
         2.浏览器地址栏只能发送GET请求
         3.想要成功请求一个接口,请求方式和请求路径都必须匹配(精准匹配)
         4.可以通过response.set设置响应头,告知浏览器编码格式
+        5.路由地址必须是绝对路径
 
     面试题:什么是路由
         1.路由可以理解为是一个键值对key-value
@@ -71,16 +80,18 @@ const app = express();  //  app ->  application
                         })
 
 */
-app.get('/test/:id',function(request,response){
+app.get('/test',function(request,response){
     console.log("query",request.query);
     console.log("params",request.params);
 
     console.log('/test get success')
 
     //response.set()用于设置响应头配置
-    response.set('content-type','text/html;charset=utf-8');
+    // response.set('content-type','text/html;charset=utf-8');
     //response.end(需要返回的数据)
-    response.end('haha哈哈')
+    // response.end('haha哈哈')
+    // response.send('haha哈哈')
+    response.status(303).json('haha哈哈')
 })
 
 app.post('/test/:id',function(request,response){
