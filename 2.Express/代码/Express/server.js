@@ -47,8 +47,34 @@ const app = express();  //  app ->  application
             3)后端路由路径匹配时,返回的一般是数据
 
             总结:后端路由就是路由路径,请求方式与回调函数的映射关系
+
+    路由传参:
+            1.GET
+                1)query     /test?key1=value1
+                2)params    /test/:id   ->  /test/1   ->占位符需要在注册路由的时候提前声明好
+            2.POST
+                1)query     /test?key1=value1
+                  接收方式:req.query
+
+                2)params    /test/:id   ->  /test/1   ->占位符需要在注册路由的时候提前声明好
+                  接收方式:req.params
+
+                3)body(请求体)
+                    优点:
+                        1.相对query和params,body是以密文进行传递数据(安全性好)
+                        2.url是有长度限制的 ->  数据量不够大
+                            body传参没有长度先知->数据量较大
+                  接收方式:req.body
+                  原生接收方式:
+                    request.on('data',function(data){
+                            console.log('body',data.toString())
+                        })
+
 */
-app.get('/test',function(request,response){
+app.get('/test/:id',function(request,response){
+    console.log("query",request.query);
+    console.log("params",request.params);
+
     console.log('/test get success')
 
     //response.set()用于设置响应头配置
@@ -57,7 +83,13 @@ app.get('/test',function(request,response){
     response.end('haha哈哈')
 })
 
-app.post('/test',function(request,response){
+app.post('/test/:id',function(request,response){
+    console.log("query",request.query);
+    console.log("params",request.params);
+    request.on('data',function(data){
+        console.log('body',data.toString())
+    })
+    // console.log('body',request.body)
     console.log('/test post success')
 
     //response.end(需要返回的数据)
