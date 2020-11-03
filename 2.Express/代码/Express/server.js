@@ -19,12 +19,42 @@ const app = express();  //  app ->  application
         1.每个路由路径都可以被不同的请求方式重复注册
         2.浏览器地址栏只能发送GET请求
         3.想要成功请求一个接口,请求方式和请求路径都必须匹配(精准匹配)
+        4.可以通过response.set设置响应头,告知浏览器编码格式
+
+    面试题:什么是路由
+        1.路由可以理解为是一个键值对key-value
+        2.key->请求路径
+        3.value->返回的数据
+
+    面试题:路由的分类
+        1.前端路由
+            1)前端路由的解析是有对应的js库进行解析(Vue-Router,React-Router-DOM)
+            2)前端路由不走网络传输层(通过监视路径的变化,来显示不同的组件)
+            3)前端路由路径匹配时,返回的是"组件"
+
+            总结:前端路由就是路由路径和路由组件的映射关系
+
+            routes:[
+                {
+                    path:"/home",
+                    component:Home
+                }
+            ]
+
+        2.后端路由
+            1)后端路由的解析是由服务器进行解析
+            2)后端路由需要前端发送请求触发
+            3)后端路由路径匹配时,返回的一般是数据
+
+            总结:后端路由就是路由路径,请求方式与回调函数的映射关系
 */
 app.get('/test',function(request,response){
     console.log('/test get success')
 
+    //response.set()用于设置响应头配置
+    response.set('content-type','text/html;charset=utf-8');
     //response.end(需要返回的数据)
-    response.end('haha')
+    response.end('haha哈哈')
 })
 
 app.post('/test',function(request,response){
