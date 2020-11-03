@@ -1,0 +1,165 @@
+1.express初体验
+1)了解什么是express
+2)express的安装流程
+3)搭建简易服务器的流程
+	1.下载并引入express
+	2.生成应用的实例对象(const app = express())
+	3.监听服务器端口号(app.listen('3000',回调函数)
+	4.通过app的get方法注册路由
+		app.get('/test',(request,response)=>{})
+		注意:前端想要请求成功.必须请求地址以及请求方式都正确
+	5.通过在回调函数内部调用response.end()方法,对前端的请求返回响应数据
+		注意:如果没有调用该方法,前端的请求依旧能发送到服务器端,但是会一直等待服务器的响应
+
+
+2.路由相关
+1)面试题:什么是路由
+	1.路由就是对象
+	2.可以认为路由是由键值对组成的 -> key:value
+	3.key:路由地址
+	4.value:请求路由地址所返回的数据
+2)路由的分类
+	1.前端路由
+		1)前端路由是由前端的js库负责解析(Vue-Router,React-Router-Dom)
+		2)前端路由不走网络传输层
+		3)前端路由获取的内容通常是'组件'
+	2.后端路由	
+		1)后端路由是由服务器负责解析
+		2)需要前端发请求才能获取到数据
+		3)通常返回的是单纯的数据
+3)路由传参
+	1.get
+		1)query传参 -> url?key1=value1&key2=value2
+		   query传参的结果 -> res.query
+		2)params传参 -> 注册路由时候提前声明占位符("/login/:id") -> 请求路径/login/123
+		   params传参的结果 -> res.params
+	2.params
+		1)query传参 -> url?key1=value1&key2=value2
+		   query传参的结果 -> res.query
+		2)params传参 -> 注册路由时候提前声明占位符("/login/:id") -> 请求路径/login/123
+		   params传参的结果 -> res.params
+		3)通过请求体body向服务器传参 -> 携带的数据量更大
+		   请求体传参的结果 -> res.body
+		   请求体是以密文进行发送数据,相对于拼接在路径中以明文传输比较安全
+
+
+3.res方法说明
+1)res.end()会将数据直接以utf-8的编码格式直接返回
+2)res.send()会将根据数据的内容对响应报文进行设置
+	例如:如果数据内容是中文,express会将响应报文中的content-type设置为text/html;charset=utf-8;
+	        浏览器接收到响应报文之后,根据content-type中的编码格式进行解析
+3)res.json()会将数据直接以json格式直接返回
+4)res.set(),传入一个配置对象,用于设置响应报文
+5)res.cookie(),用于设置cookie
+6)res.status(),用于设置响应状态码
+
+
+4.中间键使用
+1)中间键的介绍
+	本质:函数
+	作用:
+		1.添加一些扩展功能
+		2.处理请求头,响应数据
+		3.调用下一个中间键
+	3.体现形式:
+		1.function(req,res,next){}
+		2.req->请求报文对象
+		3.res->响应报文对象
+		4.next:负责调用下一个中间键
+2)中间键的使用
+	app.use(中间键函数)
+	注意:
+		1.中间键可以接收到任何方式,任何地址的请求
+		2.如果有多个中间件函数被连续调用,不要在靠前的中间键函数中返回数据,容易导致后续中间键在返回数据时出错
+		3.如果使用中间键函数和注册路由的操作同时存在,谁先匹配,就先执行谁
+
+3)内置的中间键
+	1.express.static() -> 向外暴露静态资源
+	   需要传入放置静态资源的文件夹的绝对路径 -> 通过path.resolve(路径1,路径2)将路径拼接起来
+	   __dirname -> 代表当前运行项目的绝对根路径
+	2.express.json() -> 处理post请求参数 -> application/json
+	3.express.urlencoded() -> 处理post请求参数-> application/x-www-form-urlencoded
+
+4)第三方中间键
+	npm包名:connect-multiparty
+	作用:用于解析form-data格式的请求体参数
+	1.全局使用 app.use(multipart()) -> 所有的路由都能享受到他的效果
+	2.局部使用 app.get('/test',multipart(),路由回调函数) -> 仅有当前这个路由能够享受到他的效果
+
+
+
+5.login界面及服务器搭建
+1)前端
+        收集数据
+	1.写静态页面
+	2.通过绑定监听,收集用户输入的数据
+	3.进行前端表单验证(正则验证username和password格式)
+	4.通过ajax封装库axios发送请求
+		出现问题:请求跨域,当前页面所在服务器与后端服务器不是同一个
+2)服务器
+        1.获取请求参数(获取前端通过query传过来的username和password)
+        2.后端表单验证(判断数据是否为空)
+        3.返回响应数据(根据不同情况返回不同响应) 
+
+
+6.解决跨域,实现前后端通信
+1)跨域问题出现条件:
+	1.通过浏览器发送ajax请求
+	2.请求的域名和端口号必须与当前所在服务器相同
+2)跨域的解决方法
+	1.jsonp
+		通过script标签引入服务器的js文件,不会报跨域问题
+	2.cors(HTTP访问控制)
+		通过在服务器端给响应头设置Access-Control-Allow-Origin,来添加该接口的白名单(允许谁请求本接口)
+		方法1:通过res.set({"Access-Control-Allow-Origin":"*"})
+		方法2:使用第三方库cors,它提供一个中间件函数,引入之后app.use(cors())
+	3.proxy(代理)
+		在脚手架中配置开发服务器,并配置对应的代理
+
+7.登录界面前后端交互
+1)前端
+	1.创建登录页面
+	2.监听用户的提交操作,收集用户名,密码以及确认密码
+	3.进行前端表单验证(密码和确认密码是否一致)
+	4.发送post请求将数据发送至服务器端
+2)服务器端
+	1.生成后端路由/register
+	2.由于前段通过请求体发送参数,需要使用中间键(express.json())获取请求体数据
+	3.在路由中通过req.body获取到用户名和密码
+	4.去数据库中查询是否存在匹配的用户名
+	     情况1:如果用户名已存在
+		返回响应告知前端,该用户名已存在
+	     情况2:如果用户名未存在
+		将该条数据存入至数据库中
+
+
+
+8.操作数据完成,注册功能实现
+3)数据库
+	由于在服务器端4中需要操作数据库,操作数据库流程:
+		1.通过mongoose.connect("mongodb://localhost:27017/students")连接数据库
+		2.创建集合的约束对象	->	let studentsSchema = new mongoose.Schema(字段约束条件对象)
+		3.创建模型对象		->	let studentsModel = mongoose.model('students',studentsSchema)
+		4.查询studentsModel.findOne(查询条件对象)
+		5.添加studentsModel.create(插入数据对象)
+
+9.pug模版引擎初体验
+1)通过app.set('view engine' , 'pug')通知express使用模版引擎使用pug
+2)将所有的模版文件存放于根路径的views文件夹内
+	标签之间通过缩进确认关系
+	标签属性 input(type="text")
+	文本内容 div  文本	或者div=文本
+	循环
+		each value in list
+			li=value
+	条件判断
+		if  value==="123"
+			div haha
+	
+3)在路由中使用response.render(模版文件名称,模版所需要的参数对象)
+
+4)通过app.set('views','./view')可以设置当前模版文件存储的路径
+
+
+
+
