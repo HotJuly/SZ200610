@@ -23,9 +23,9 @@ app.use(express.static(resolve(__dirname,"./public")))
 app.post('/upload',formidable(),function(req,res,next){
     // console.log(req.files)
     const image = req.files.file;
-    const createReadStream = fs.createReadStream(image.path);
-    const createWriteStream = fs.createWriteStream('./public/'+image.name);
-    createReadStream.pipe(createWriteStream);
+    const readStream = fs.createReadStream(image.path);
+    const writeStream = fs.createWriteStream('./public/'+image.name);
+    readStream.pipe(writeStream);
     res.end("/"+image.name)
 })
 
