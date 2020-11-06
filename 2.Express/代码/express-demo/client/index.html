@@ -14,11 +14,13 @@
         <label for="#username">用户名:</label><input type="text" id="username">
     </div>
     <div>
-        <label for="#password">密码:</label><input type="text" id="password">
+        <label for="#password">密码:</label><input type="password" id="password">
     </div>
     <button id="btn">提交</button>
     <script>
         let formdata= new FormData();
+
+        //当用户选择图片时,自动上传
         file.onchange=async function(){
             console.log(this.files[0])
             const image =this.files[0];
@@ -30,6 +32,24 @@
             // img.width="100";
             // img.height="100";
             // avatarImg.appendChild(img)
+        }
+
+        //当用户点击提交按钮时,收集用户数据,并发送请求
+        btn.onclick=async function(){
+            //收集用户数据
+            let usernameValue = username.value.trim();
+            let passwordValue = password.value.trim();
+            let avatarSrc = avatarImg.src;
+
+            //数据校验->前端表单验证
+            if(usernameValue&&passwordValue&&avatarImg){
+                let result = await axios.post('http://localhost:3000/register',{
+                    username:usernameValue,
+                    password:passwordValue,
+                    avatarImg:avatarSrc
+                });
+                alert(result.data)
+            }
         }
 
     </script>
