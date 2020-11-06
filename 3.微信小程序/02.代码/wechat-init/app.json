@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/log/log"
+  ],
+  "window":{
+    "navigationBarBackgroundColor":"#ff00ff",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "atguigu"
+  }
+}
