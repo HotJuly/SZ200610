@@ -17,6 +17,7 @@ Page({
     msg:"我是初始数据"
   },
   onLoad(){
+    debugger
     /*
       读取和修改data数据
         Vue ->  this.msg  ->  数据代理
@@ -53,36 +54,73 @@ Page({
     //   msg: "我是修改之后的数据1"
     // })
     // console.log('msg2', this.data.msg)
-    this.setData({
-      msg: "我是修改之后的数据2"
-    })
+
+    console.log('-----------------onLoad--------------')
+
     // console.log('msg3', this.data.msg)
     //小程序中,全局对象不是window,是wx
     // console.log('window',window)
     // console.log('wx',wx)
   },
+
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    console.log('-----------------onReady--------------')
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    console.log('-----------------onShow--------------')
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    console.log('-----------------onHide--------------')
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    console.log('-----------------onUnload--------------')
+  },
   handleParent() {
-    console.log('handleParent')
+    // console.log('handleParent')
   },
   handleChild() {
-    console.log('handleChild')
+    // console.log('handleChild')
     /*
       wx.navigateTo(与push方法相似)
         注意:
           1.url写相对路径也可以使用,最好写绝对路径
           2.该API会保留当前页面,保留页面的实例对象,页面会隐藏(keep-alive)
           3.小程序页面栈最多保留十层(早期页面栈最多五层)
+          4.会触发当前页面的onHide生命周期
 
       wx.redirectTo(与replace相似)
         注意:
           1.该API会关闭当前页面,当前页面会被卸载
+          2.会触发当前页面的onUnload生命周期
      */
-    wx.navigateTo({
-      // url:"../log/log"
-      url:"/pages/log/log"
+
+
+    this.setData({
+      msg: "我是修改之后的数据2"
     })
-    // wx.redirectTo({
-    //   url: '/pages/log/log',
+
+    // wx.navigateTo({
+    //   // url:"../log/log"
+    //   url:"/pages/log/log"
     // })
+    wx.redirectTo({
+      url: '/pages/log/log',
+    })
   }
 })
