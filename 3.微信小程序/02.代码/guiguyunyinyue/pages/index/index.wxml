@@ -1,4 +1,6 @@
 <view class="indexContainer">
+
+  <!-- 轮播图区域 -->
   <swiper class="bannerSwiper" 
     indicator-active-color="#d43c33"
     indicator-color="ivory"
@@ -21,4 +23,28 @@
       <image class="bannerImg" src="/images/nvsheng.jpg"></image>
     </swiper-item>
   </swiper>
+
+  <!-- 导航区域 -->
+  <view class="navContainer">
+    <view class="navItem">
+      <view class="iconfont  icon-meirituijian-"></view>
+      <text>每日推荐</text>
+    </view>
+    <view class="navItem">
+      <view class="iconfont  icon-gedan1"></view>
+      <text>每日推荐</text>
+    </view>
+    <view class="navItem">
+      <view class="iconfont  icon-icon-ranking"></view>
+      <text>每日推荐</text>
+    </view>
+    <view class="navItem">
+      <view class="iconfont  icon-diantai"></view>
+      <text>每日推荐</text>
+    </view>
+    <view class="navItem">
+      <view class="iconfont   icon-zhiboguankanliangbofangsheyingshexiangjixianxing"></view>
+      <text>每日推荐</text>
+    </view>
+  </view>
 </view>
