@@ -48,20 +48,41 @@ Page({
     // console.log('msg', this.msg)
     // console.log('this', this)
     // console.log('msg', this.data.msg)
-    console.log('msg1', this.data.msg)
-    this.setData({
-      msg: "我是修改之后的数据1"
-    })
-    console.log('msg2', this.data.msg)
+    // console.log('msg1', this.data.msg)
+    // this.setData({
+    //   msg: "我是修改之后的数据1"
+    // })
+    // console.log('msg2', this.data.msg)
     this.setData({
       msg: "我是修改之后的数据2"
     })
-    console.log('msg3', this.data.msg)
+    // console.log('msg3', this.data.msg)
+    //小程序中,全局对象不是window,是wx
+    // console.log('window',window)
+    // console.log('wx',wx)
   },
   handleParent() {
     console.log('handleParent')
   },
   handleChild() {
     console.log('handleChild')
+    /*
+      wx.navigateTo(与push方法相似)
+        注意:
+          1.url写相对路径也可以使用,最好写绝对路径
+          2.该API会保留当前页面,保留页面的实例对象,页面会隐藏(keep-alive)
+          3.小程序页面栈最多保留十层(早期页面栈最多五层)
+
+      wx.redirectTo(与replace相似)
+        注意:
+          1.该API会关闭当前页面,当前页面会被卸载
+     */
+    wx.navigateTo({
+      // url:"../log/log"
+      url:"/pages/log/log"
+    })
+    // wx.redirectTo({
+    //   url: '/pages/log/log',
+    // })
   }
 })
