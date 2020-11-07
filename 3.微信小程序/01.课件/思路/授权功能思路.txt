@@ -1,0 +1,5 @@
+用户首次登录授权功能
+button组件配合open-type
+
+用户二次登陆免授权
+在onLoad中调用wx.getUserInfo方法获取用户信息(必须设置success)

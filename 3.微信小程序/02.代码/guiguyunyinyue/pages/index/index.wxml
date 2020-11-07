@@ -1,0 +1,24 @@
+<view class="indexContainer">
+  <swiper class="bannerSwiper" 
+    indicator-active-color="#d43c33"
+    indicator-color="ivory"
+    circular 
+    indicator-dots
+  >
+    <swiper-item class="swiper-item">
+      <image class="bannerImg" src="/images/nvsheng.jpg"></image>
+    </swiper-item>
+    <swiper-item class="swiper-item">
+      <image class="bannerImg" src="/images/nvsheng.jpg"></image>
+    </swiper-item>
+    <swiper-item class="swiper-item">
+      <image class="bannerImg" src="/images/nvsheng.jpg"></image>
+    </swiper-item>
+    <swiper-item class="swiper-item">
+      <image class="bannerImg" src="/images/nvsheng.jpg"></image>
+    </swiper-item>
+    <swiper-item class="swiper-item">
+      <image class="bannerImg" src="/images/nvsheng.jpg"></image>
+    </swiper-item>
+  </swiper>
+</view>
