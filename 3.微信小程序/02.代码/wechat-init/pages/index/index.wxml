@@ -1,5 +1,7 @@
 <view id="indexContainer">
   <image class="avatarImg" src="/images/nvsheng.jpg"></image>
-  <text class="username">{{msg}}</text>
-  <text class="info">尚硅谷欢迎您!</text>
+  <text class="username  {{msg}}" >{{msg}}</text>
+  <view class="info" catchtouchstart="handleParent">
+    <text class="child" catchtouchstart="handleChild">尚硅谷欢迎您!</text>
+  </view>
 </view>

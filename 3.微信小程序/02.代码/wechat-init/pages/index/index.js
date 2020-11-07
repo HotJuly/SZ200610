@@ -42,12 +42,26 @@ Page({
 
 
         小程序  ->  this.setData({msg:msg})
+          setData更新data的效果,是同步还是异步?
+          同步修改内存中的data数据,但是会异步更新视图层(隔一段时间发一次)
      */
     // console.log('msg', this.msg)
     // console.log('this', this)
     // console.log('msg', this.data.msg)
+    console.log('msg1', this.data.msg)
     this.setData({
-      msg: "我是修改之后的数据"
+      msg: "我是修改之后的数据1"
     })
+    console.log('msg2', this.data.msg)
+    this.setData({
+      msg: "我是修改之后的数据2"
+    })
+    console.log('msg3', this.data.msg)
+  },
+  handleParent() {
+    console.log('handleParent')
+  },
+  handleChild() {
+    console.log('handleChild')
   }
 })

@@ -14,7 +14,11 @@
 }
 
 .info{
-  padding: 10rpx;
+  padding: 50rpx;
   border:1rpx solid;
   border-radius: 10rpx;
+}
+
+.info .child{
+  border: 1px solid;
 }

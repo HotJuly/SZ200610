@@ -1,0 +1,36 @@
+1.文件介绍
+project.config.json	->	项目配置(修改APPID,ES6能否使用等)
+sitemap.json	->	页面索引规则
+app.js		->	页面"行为"		->	App(配置对象)	->注册小程序,有且只能调用一次,只能在app.js中
+app.json		->	页面配置
+	window	->	用于设置导航条样式,小程序背景色等
+	pages	->	注册页面		->	声明注册页面	
+		注意:1.小程序首次显示的是pages数组中的第一个页面
+			2.注册页面路径,不需要写后缀名,他会自动引入目录下的四类文件
+app.wxss		->	页面"外貌"		->	公共样式,全局样式
+app.wxml(不存在这个文件,因为app代表整个小程序,他自身没有wxml结构)
+
+页面
+index.js	->	Page()	->	注册页面
+
+2.数据绑定
+data是一个对象,内部声明所有的状态数据
+
+wxml显示数据的语法:{{msg}}	->	在wxml中,想要使用data就必须带上插值表达式
+
+读取的语法:React(this.state.msg)	->	this.data.msg	->	没有数据代理
+
+修改的语法:React(this.setState({msg:msg}))		->	this.setData({msg:msg})
+
+React的setState
+该函数的执行:同步执行
+效果是同步还是异步	->	效果:执行完setState函数,是否会同步修改state的数据
+同步(执行完setState,下一行代码就能拿到最新的state数据):
+	定时器,原生事件
+异步(执行完setState,下一行代码拿到的还是旧的state,只有当生命周期或者合成事件执行结束,才能获取到最新的state):
+	生命周期或者合成事件
+	合成事件VS原生事件
+		区分方式:命名规则,合成事件是驼峰命名法
+		合成事件的特点:合成事件绑定的元素,并不是你写onClick的元素,他会绑定到body身上,通过事件冒泡触发
+
+

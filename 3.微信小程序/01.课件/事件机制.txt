@@ -1,0 +1,12 @@
+1.事件机制一共分为几种
+网景->事件捕获机制
+IE->事件冒泡机制
+ECMAScript	->ECMA	->标准事件机制
+
+2.标准事件机制分为几个阶段
+分为三个阶段,捕获阶段->目标阶段->冒泡阶段
+
+
+3.如何阻止冒泡
+IE->event.cancelBubble=true;
+标准->event.stopPropagation();
