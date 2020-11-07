@@ -53,8 +53,16 @@ Page({
      this.setData({
        msg: "我是修改之后的数据1"
      })
-    */ console.log('msg2', this.data.msg)
-
+     console.log('msg2', this.data.msg)
+     */
+    wx.getUserInfo({
+      success:(detail)=>{
+        // console.log('success',data)
+        this.setData({
+          userInfo: detail.userInfo
+        })
+      }
+    });
     console.log('-----------------onLoad--------------')
 
     // console.log('msg3', this.data.msg)
