@@ -1,6 +1,17 @@
 <view id="indexContainer">
-  <image class="avatarImg" src="/images/nvsheng.jpg"></image>
-  <text class="username  {{msg}}" >{{msg}}</text>
+  <image 
+  class="avatarImg" 
+  src="{{userInfo.avatarUrl}}"
+  wx:if="{{userInfo.avatarUrl}}"></image>
+
+  <button 
+  class="avatarImg" 
+  open-type="getUserInfo"
+  bindgetuserinfo="getUserInfo"
+   wx:else
+  >获取用户信息</button>
+
+  <text class="username  {{msg}}" >{{userInfo.nickName}}</text>
   <view class="info" bindtouchstart="handleParent">
     <text class="child" bindtouchstart="handleChild">尚硅谷欢迎您!</text>
   </view>

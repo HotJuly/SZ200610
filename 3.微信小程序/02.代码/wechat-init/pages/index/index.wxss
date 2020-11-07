@@ -13,6 +13,11 @@
   border-radius: 50%;
 }
 
+button{
+  line-height: 400rpx;
+  border: 1rpx solid;
+}
+
 .info{
   padding: 50rpx;
   border:1rpx solid;

@@ -14,10 +14,10 @@ Page({
     
     
      */
-    msg:"我是初始数据"
+    msg:"我是初始数据",
+    userInfo:{}
   },
   onLoad(){
-    debugger
     /*
       读取和修改data数据
         Vue ->  this.msg  ->  数据代理
@@ -46,14 +46,14 @@ Page({
           setData更新data的效果,是同步还是异步?
           同步修改内存中的data数据,但是会异步更新视图层(隔一段时间发一次)
      */
-    // console.log('msg', this.msg)
-    // console.log('this', this)
-    // console.log('msg', this.data.msg)
-    // console.log('msg1', this.data.msg)
-    // this.setData({
-    //   msg: "我是修改之后的数据1"
-    // })
-    // console.log('msg2', this.data.msg)
+    /* console.log('msg', this.msg)
+     console.log('this', this)
+     console.log('msg', this.data.msg)
+     console.log('msg1', this.data.msg)
+     this.setData({
+       msg: "我是修改之后的数据1"
+     })
+    */ console.log('msg2', this.data.msg)
 
     console.log('-----------------onLoad--------------')
 
@@ -122,5 +122,18 @@ Page({
     wx.redirectTo({
       url: '/pages/log/log',
     })
+  },
+
+  //用于获取用户信息
+  getUserInfo(data){
+    console.log('getUserInfo', data)
+    if(data.detail.rawData){
+      console.log('用户授权成功')
+      this.setData({
+        userInfo:data.detail.userInfo
+      })
+    }else{
+      console.log('用户授权失败')
+    }
   }
 })
