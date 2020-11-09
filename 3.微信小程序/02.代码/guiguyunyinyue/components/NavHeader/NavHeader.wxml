@@ -1,0 +1,13 @@
+<view class="header">
+  <view class="title">
+    {{title}}
+  </view>
+  <view class="moreContent">
+    <view class="contentTitle">
+      {{contentTitle}}
+    </view>
+    <view class="more">
+      查看更多
+    </view>
+  </view>
+</view>
