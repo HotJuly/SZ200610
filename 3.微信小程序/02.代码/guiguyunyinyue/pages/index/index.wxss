@@ -77,3 +77,43 @@
    -webkit-box-orient:vertical;
    overflow:hidden;
 }
+
+.topContainer{
+  margin:20rpx;
+}
+
+.topContainer .topSwiper{
+  height:470rpx;
+}
+
+.topContainer .topSwiper .topItem{
+  background-color:pink;
+  width:94%;
+}
+
+.topContainer .topSwiper .topItem .title{
+  font-size:26rpx;
+  padding-bottom:20rpx;
+}
+
+.topContainer .topSwiper .topItem .topList .item .topNum{
+  width:100rpx;
+  height:100rpx;
+  line-height:100rpx;
+  text-align: center;
+}
+
+.topContainer .topSwiper .topItem .topList .item{
+  display:flex;
+  align-items:center;
+}
+
+.topContainer .topSwiper .topItem .topList .item .topImg{
+  width:100rpx;
+  height:100rpx;
+  border-radius: 10rpx;
+}
+
+.topContainer .topSwiper .topItem .topList .item{
+  margin:20rpx 0;
+}

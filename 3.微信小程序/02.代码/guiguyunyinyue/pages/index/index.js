@@ -49,6 +49,26 @@ Page({
           recommendList: recommendData.result
         })
     })
+
+    let arr = [1,5,6,10,20,22,23,25,28,30];
+    let index=0;
+    let topList = [];
+    while (index < arr.length) {
+      let res = await ajax('/top/list', { idx: arr[index++] })
+      // .then((res)=>{
+        //从请求会来的数据中解构出有用的数据
+        const { name,tracks } = res.playlist;
+        topList.push({
+          name,
+          tracks
+        })
+
+        //每次获取到新数据,就会更新到页面上
+        this.setData({
+          topList
+        })
+      // })
+    }
     
   },
 
