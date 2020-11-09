@@ -12,7 +12,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // debugger
+    /*
+      1.在哪发送ajax
+        onLoad
+      2.怎么发送ajax
+        wx.request
+      3.往哪发送ajax
+        看接口文档,并测试
+     */
+    wx.request({
+      url:"http://localhost:3000/banner",
+      data:{
+        type:2
+      },
+      success:(res)=>{
+        console.log('res',res.data.banners)
+        this.setData({
+          banners: res.data.banners
+        })
+      }
+    })
   },
 
   /**

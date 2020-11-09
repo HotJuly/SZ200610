@@ -7,20 +7,12 @@
     circular 
     indicator-dots
   >
-    <swiper-item class="swiper-item">
-      <image class="bannerImg" src="/images/nvsheng.jpg"></image>
-    </swiper-item>
-    <swiper-item class="swiper-item">
-      <image class="bannerImg" src="/images/nvsheng.jpg"></image>
-    </swiper-item>
-    <swiper-item class="swiper-item">
-      <image class="bannerImg" src="/images/nvsheng.jpg"></image>
-    </swiper-item>
-    <swiper-item class="swiper-item">
-      <image class="bannerImg" src="/images/nvsheng.jpg"></image>
-    </swiper-item>
-    <swiper-item class="swiper-item">
-      <image class="bannerImg" src="/images/nvsheng.jpg"></image>
+    <swiper-item class="swiper-item"
+    wx:for="{{banners}}"
+    wx:for-item="banner"
+    wx:key="bannerId"
+    >
+      <image class="bannerImg" src="{{banner.pic}}"></image>
     </swiper-item>
   </swiper>
 
