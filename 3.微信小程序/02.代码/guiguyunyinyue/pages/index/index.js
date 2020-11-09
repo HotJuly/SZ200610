@@ -1,4 +1,5 @@
 // pages/index/index.js
+import ajax from '../../utils/ajax.js';
 Page({
 
   /**
@@ -11,7 +12,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad:async function (options) {
     // debugger
     /*
       1.在哪发送ajax
@@ -21,18 +22,26 @@ Page({
       3.往哪发送ajax
         看接口文档,并测试
      */
-    wx.request({
-      url:"http://localhost:3000/banner",
-      data:{
-        type:2
-      },
-      success:(res)=>{
-        console.log('res',res.data.banners)
-        this.setData({
-          banners: res.data.banners
-        })
-      }
+    // wx.request({
+    //   url:"http://localhost:3000/banner",
+    //   data:{
+    //     type:2
+    //   },
+    //   success:(res)=>{
+    //     console.log('res',res.data.banners)
+    //     this.setData({
+    //       banners: res.data.banners
+    //     })
+    //   }
+    // })
+    let result = await ajax('/banner', {type:2})
+      // .then((res)=>{
+      //   console.log('result', res);
+    this.setData({
+      banners: result.banners
     })
+      // })
+    
   },
 
   /**
