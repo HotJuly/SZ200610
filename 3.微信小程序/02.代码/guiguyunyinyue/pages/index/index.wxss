@@ -30,6 +30,10 @@
   color:#333;
 }
 
+.header .moreContent{
+  overflow:hidden;
+}
+
 .header .moreContent .contentTitle{
   float:left;
   font-size:30rpx;
@@ -51,7 +55,7 @@
 
 .recommendContainer .recommendScroll {
   display: flex;
-  padding-top:20rpx;
+  margin-top:20rpx;
 }
 
 .recommendContainer .recommendScroll .recommendItem{
