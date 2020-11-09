@@ -55,6 +55,7 @@
 
 .recommendContainer .recommendScroll {
   display: flex;
+  height:290rpx;
   margin-top:20rpx;
 }
 
