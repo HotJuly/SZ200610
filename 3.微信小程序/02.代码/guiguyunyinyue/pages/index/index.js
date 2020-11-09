@@ -34,13 +34,21 @@ Page({
     //     })
     //   }
     // })
-    let result = await ajax('/banner', {type:2})
-      // .then((res)=>{
-      //   console.log('result', res);
-    this.setData({
-      banners: result.banners
+    //请求banner轮播图数据
+    ajax('/banner', {type:2})
+      .then((result) => {
+        this.setData({
+          banners: result.banners
+        })
     })
-      // })
+
+    //请求推荐歌单数据
+    ajax('/personalized', { limit: 10 })
+      .then((recommendData) => {
+        this.setData({
+          recommendList: recommendData.result
+        })
+    })
     
   },
 

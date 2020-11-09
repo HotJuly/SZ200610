@@ -56,55 +56,12 @@
       </view>
     </view>
     <scroll-view class="recommendScroll" enable-flex scroll-x>
-      <view class="recommendItem">
-        <image src="/images/nvsheng.jpg"></image>
+      <view class="recommendItem" wx:for="{{recommendList}}" wx:key="id">
+        <image src="{{item.picUrl}}"></image>
         <view class="info">
-          贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯
+          {{item.name}}
         </view>
       </view>
-      
-      <view class="recommendItem">
-        <image src="/images/nvsheng.jpg"></image>
-        <view class="info">
-          贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯
-        </view>
-      </view>
-      
-      <view class="recommendItem">
-        <image src="/images/nvsheng.jpg"></image>
-        <view class="info">
-          贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯
-        </view>
-      </view>
-      
-      <view class="recommendItem">
-        <image src="/images/nvsheng.jpg"></image>
-        <view class="info">
-          贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯
-        </view>
-      </view>
-      
-      <view class="recommendItem">
-        <image src="/images/nvsheng.jpg"></image>
-        <view class="info">
-          贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯
-        </view>
-      </view>
-      
-      <view class="recommendItem">
-        <image src="/images/nvsheng.jpg"></image>
-        <view class="info">
-          贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯
-        </view>
-      </view>
-      
-      <view class="recommendItem">
-        <image src="/images/nvsheng.jpg"></image>
-        <view class="info">
-          贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯贾静雯爱我我爱贾静雯
-        </view>
-      </view>
-      
     </scroll-view>
     123
   </view>

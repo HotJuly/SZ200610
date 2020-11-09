@@ -18,7 +18,7 @@ export default function (url, data={}, method = "GET") {
       data,
       method,
       success: (res) => {
-        console.log('res', res.data.banners);
+        // console.log('res', res.data.banners);
         resolve(res.data);
         // this.setData({
         //   banners: res.data.banners
