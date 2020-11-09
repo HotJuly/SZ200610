@@ -50,13 +50,22 @@ Page({
         })
     })
 
+    //声明数组用于收集想要请求的榜单
     let arr = [1,5,6,10,20,22,23,25,28,30];
+
+    //记录当前请求的次数
     let index=0;
+
+    //收集请求回来的所有榜单对象数据
     let topList = [];
+
+    //通过循环,遍历发送请求
     while (index < arr.length) {
+      //通过await将请求分成多阶段请求,防止首屏加载过慢问题
       let res = await ajax('/top/list', { idx: arr[index++] })
       // .then((res)=>{
-        //从请求会来的数据中解构出有用的数据
+
+        //从请求会来的数据中解构出有用的数据,去除无用数据
         const { name,tracks } = res.playlist;
         topList.push({
           name,

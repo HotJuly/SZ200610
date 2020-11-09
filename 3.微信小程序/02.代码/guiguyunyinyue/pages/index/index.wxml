@@ -70,7 +70,7 @@
           </view>
           <view class="topList">
             <view class="item" wx:for="{{musicItem.tracks}}">
-              <image class="topImg" src="{{item.al.picUrl}}"></image>
+              <image lazy-load class="topImg" src="{{item.al.picUrl}}"></image>
               <text class="topNum">{{index+1}}</text>
               <text class="topContent">{{item.name}}</text>
             </view>
