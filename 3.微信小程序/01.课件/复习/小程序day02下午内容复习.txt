@@ -1,0 +1,22 @@
+1.用户首次登陆授权功能
+	1.button组件
+	2.open-type="getUserInfo"->就可以弹出授权窗口
+	3.绑定getuserinfo事件(bind语法)->可以获取到用户的信息
+	4.将用户信息保存到data中,在wxml中动态渲染
+
+2.用户二次登录免授权功能
+	wx.getUserInfo->API获取用户信息
+	将用户信息保存到data中,在wxml中动态渲染
+	注意:早期直接调用wx.getUserInfo()可以直接弹出授权窗口
+
+3.使用swiper组件实现轮播图,内部只能防止swiper-item组件
+
+4.小程序无法识别css文件,必须将iconfont.css文件改成iconfont.wxss
+使用方式:
+	1.万国码->伪元素
+		兼容性IE6+
+	2.class->伪元素
+		兼容性IE8+
+	3.Symbol
+		兼容性IE9+
+		支持多色图标

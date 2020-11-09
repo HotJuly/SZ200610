@@ -23,3 +23,76 @@
   color:white;
   margin:20rpx 0;
 }
+
+/* 推荐区域头部样式开始 */
+.header .title{
+  font-size:28rpx;
+  color:#333;
+}
+
+.header .moreContent .contentTitle{
+  float:left;
+  font-size:30rpx;
+}
+
+.header .moreContent .more{
+  float:right;
+  font-size:22rpx;
+  padding:10rpx 20rpx;
+  border:1rpx solid;
+  border-radius:15rpx;
+}
+
+/* 推荐区域头部样式结束 */
+
+.recommendContainer{
+  padding:0 20rpx;
+}
+
+.recommendContainer .recommendScroll {
+  display: flex;
+  padding-top:20rpx;
+}
+
+.recommendContainer .recommendScroll .recommendItem{
+  width:200rpx;
+  margin-right:20rpx;
+}
+
+.recommendContainer .recommendScroll image{
+  width:200rpx;
+  height:200rpx;
+  border-radius: 10rpx;
+}
+
+.recommendContainer .recommendScroll .recommendItem .info{
+  display:block;
+  height:84rpx;
+  /* line-height:28rpx; */
+  /* 单行文本溢出隐藏
+    1.文本禁止换行
+      white-space:nowrap;
+    2.溢出隐藏
+      overflow:hidden;
+    3.文本溢出隐藏显示省略号
+      text-overflow: ellipsis;
+   */
+  /* white-space:nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis; */
+  
+  /* 多行文本溢出隐藏
+    1.开启-webkit-box盒模型
+      display:-webkit-box;
+    2.设置溢出隐藏的行数
+      -webkit-line-clamp:2;
+    3.设置文本排列方向
+      -webkit-box-orient:vertical;
+    4.设置内容溢出隐藏
+      overflow:hidden;
+   */
+   display:-webkit-box;
+   -webkit-line-clamp:2;
+   -webkit-box-orient:vertical;
+   overflow:hidden;
+}
