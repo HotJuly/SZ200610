@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/personal/personal",
     "pages/index/index",
     "pages/video/video"
@@ -15,10 +16,10 @@
     "selectedColor": "#d43c33",
     "list": [
       {
-      "pagePath": "pages/index/index",
-      "text": "首页",
-      "iconPath": "/images/tabs/tab-home.png",
-      "selectedIconPath": "/images/tabs/tab-home-current.png"
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/images/tabs/tab-home.png",
+        "selectedIconPath": "/images/tabs/tab-home-current.png"
       },
       {
         "pagePath": "pages/video/video",

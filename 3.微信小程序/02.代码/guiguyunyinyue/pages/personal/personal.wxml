@@ -54,6 +54,27 @@
         <text>个性装扮</text>
       </view>
     </view>
-  </view>
+    
+    <view class="playContent">
+      <view class="playList">
+        <view class="playTitle">最近播放</view>
+        <view class="noData">暂时没有数据</view>
+      </view>
 
+      <view class="cardList">
+        <view class="card-item">
+          <text class="title">我的音乐</text>
+          <text class="more"> > </text>
+        </view>
+        <view class="card-item">
+          <text class="title">我的收藏</text>
+          <text class="more"> > </text>
+        </view>
+        <view class="card-item">
+          <text class="title">我的电台</text>
+          <text class="more"> > </text>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

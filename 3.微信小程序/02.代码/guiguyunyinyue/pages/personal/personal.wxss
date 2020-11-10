@@ -165,3 +165,53 @@
 
 }
 
+
+.playContent{
+  background: white;
+  margin-top:20rpx;
+}
+
+.playList .playTitle{
+  font-size:24rpx;
+  color:#333;
+  text-indent: 20rpx;
+  padding:20rpx;
+}
+
+.playList .playScroll{
+  display:flex;
+  height:200rpx;
+  flex-wrap:nowrap;
+  /* white-space:nowrap; */
+}
+
+.playList .playScroll image{
+  width:160rpx;
+  height:160rpx;
+  margin-left: 20rpx;
+  flex-shrink: 0;
+}
+
+.playList .noData{
+  line-height:160rpx;
+  text-indent: 40rpx;
+}
+
+
+.cardList {
+  margin-top: 1rpx;
+  background: white;
+
+}
+.cardList .card-item{
+  border-top: 1rpx solid #eee;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 10rpx;
+  font-size: 26rpx;
+  color: #333;
+}
+.cardList .card-item .more {
+  float: right;
+}
+
