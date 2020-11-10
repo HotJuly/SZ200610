@@ -5,7 +5,47 @@ Page({
    * 页面的初始数据
    */
   data: {
+    moveDistance:0,
+    moveTransition:""
+  },
+  handleTouchStart(event){
+    /*
+      事件对象中记录手指位置的有两个属性
+      event.touches         ->  记录的是屏幕上所有的手指
+      event.changedTouches  ->  记录的是当前屏幕上正在发生变化的手指
+     */
+    // console.log('start',event.touches[0].clientY)
+    this.startY = event.touches[0].clientY
 
+    //手指按下时候,清空过渡效果
+    this.setData({
+      moveTransition:""
+    })
+  },
+
+  handleTouchMove(event) {
+    // console.log('move', event.touches[0].clientY)
+    let moveY = event.touches[0].clientY;
+    let moveDistance = moveY - this.startY;
+    // console.log(moveDistance)
+
+    //禁止元素往上移动
+    if (moveDistance<=0)return;
+
+    //元素超过80rpx,就禁止移动
+    if (moveDistance > 80) return;
+
+    this.setData({
+      moveDistance
+    })
+  },
+
+  handleTouchEnd(){
+    // console.log('handleTouchEnd')
+    this.setData({
+      moveDistance:0,
+      moveTransition:"transform 1s"
+    })
   },
 
   /**

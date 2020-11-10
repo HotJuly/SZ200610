@@ -1,0 +1,29 @@
+1.什么是组件
+	具有特定功能的代码片段或者代码集合
+
+2.请用html描述组件
+	标签就是组件	->	button
+
+3.拆分组件
+	一个组件具有几个文件
+		wxml
+		wxss
+		js	->	Component()	->	注册组件
+		json	->	component:true	->	声明当前文件是一个组件
+	
+	组件的使用
+		1.创建文件
+		2.引入文件	->	index.json中配置usingComponents(Object类型)
+			->	key->组件名称	value->组件路径
+		3.wxml中当作自闭合标签使用
+4.区分swiper和scoll-view
+	观察组件,是否有明显的分页(页或者屏的概念)
+
+5.swiper组件使用
+	提前看到下个swiper-item的效果:需要设置组件属性:next-margin:"50rpx"
+
+6.tabBar的使用
+	tabBar	->	去app.json中配置
+		->	list必配(数据类型:数组,注意:最少2个,最多5个)
+		->	tab对象(pagePath,text,iconPath,selectedIconPath)
+		->	注意:iconPath和selectedIconPath只允许使用本地图标
