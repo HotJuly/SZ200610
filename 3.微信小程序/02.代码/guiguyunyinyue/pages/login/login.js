@@ -1,11 +1,12 @@
 // pages/login/login.js
+import ajax from '../../utils/ajax.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    phone:"123",
+    phone:"",
     password:""
   },
 
@@ -37,10 +38,50 @@ Page({
     // {
     //   "type":"123"
     // }
+    //{}==={} ->  语法糖->new Object() === new Object()
 
-    this.setData({
-      [type]: event.detail.value
+    //前台表单验证
+    if (event.detail.value.trim()) {
+      this.setData({
+        [type]: event.detail.value
+      })
+    }else{
+      //通过showToast弹窗提示用户
+      wx.showToast({
+        title:"帐号或密码有误,请重新输入",
+        icon:'none'
+      })
+    }
+  },
+
+  async handleTap(){
+    console.log('handleTap')
+    //1.收集数据
+    const {phone,password} = this.data
+
+    //2.发送请求
+    let result = await ajax('/login/cellphone',{
+      phone,
+      password
     })
+    if (result.code === 200) {
+      //登陆成功
+      wx.showToast({
+        title: '登录成功,即将跳转',
+        icon: "none"
+      })
+      //跳转回到个人中心页面
+      //wx.switchTab用于跳转tabBar页面,关闭所有非tabBar页面
+      wx.switchTab({
+        url: '/pages/personal/personal'
+      })
+    } else {
+      //登录失败
+      wx.showToast({
+        title: '登录失败,请确认帐号密码',
+        icon: "none"
+      })
+    }
   },
 
   /**
