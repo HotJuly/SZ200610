@@ -55,7 +55,6 @@ Page({
   },
 
   async handleTap(){
-    console.log('handleTap')
     //1.收集数据
     const {phone,password} = this.data
 

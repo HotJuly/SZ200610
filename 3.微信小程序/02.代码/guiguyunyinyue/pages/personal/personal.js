@@ -1,4 +1,5 @@
 // pages/personal/personal.js
+import ajax from '../../utils/ajax.js';
 Page({
 
   /**
@@ -7,7 +8,8 @@ Page({
   data: {
     moveDistance:0,
     moveTransition:"",
-    userInfo:{}
+    userInfo:{},
+    playList:[]
   },
   handleTouchStart(event){
     /*
@@ -80,12 +82,29 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: async function () {
     let userInfo = JSON.parse(wx.getStorageSync("userInfo") || "{}");
-    console.log('userInfo', userInfo)
+    let uid = userInfo.userId;
     this.setData({
       userInfo
     })
+    let result = await ajax('/user/record',{
+      uid,
+      type:1
+    })
+    // result.weekData.map ->  生成遍历的数据,过滤无用数据
+    let playList = result.weekData.map((item)=>{
+      return {
+        id:item.song.id,
+        url: item.song.al.picUrl
+      }
+    })
+    this.setData({
+      playList
+    })
+    // this.setData({
+    //   playList:result.weekData
+    // })
   },
 
   /**
