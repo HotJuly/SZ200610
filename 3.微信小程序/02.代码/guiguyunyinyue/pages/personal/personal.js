@@ -6,7 +6,8 @@ Page({
    */
   data: {
     moveDistance:0,
-    moveTransition:""
+    moveTransition:"",
+    userInfo:{}
   },
   handleTouchStart(event){
     /*
@@ -48,11 +49,25 @@ Page({
     })
   },
 
+  toLogin(){
+    wx.navigateTo({
+      url: '/pages/login/login',
+    })
+    // wx.redirectTo({
+    //   url: '/pages/login/login',
+    // })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    //同步读取Storage中的用户信息userInfo
+    // let userInfo = JSON.parse(wx.getStorageSync("userInfo")||"{}");
+    // console.log('userInfo',userInfo)
+    // this.setData({
+    //   userInfo
+    // })
   },
 
   /**
@@ -66,7 +81,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let userInfo = JSON.parse(wx.getStorageSync("userInfo") || "{}");
+    console.log('userInfo', userInfo)
+    this.setData({
+      userInfo
+    })
   },
 
   /**

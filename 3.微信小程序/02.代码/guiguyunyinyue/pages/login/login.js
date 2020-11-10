@@ -64,12 +64,20 @@ Page({
       phone,
       password
     })
+    // console.log(result.profile)
     if (result.code === 200) {
       //登陆成功
       wx.showToast({
         title: '登录成功,即将跳转',
         icon: "none"
       })
+
+      //将用户信息存储到Storage中
+      wx.setStorage({
+        key:"userInfo",
+        data: JSON.stringify(result.profile)
+      })
+
       //跳转回到个人中心页面
       //wx.switchTab用于跳转tabBar页面,关闭所有非tabBar页面
       wx.switchTab({

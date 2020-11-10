@@ -1,0 +1,31 @@
+1.personal页面的C3效果
+  需求:让元素向下移动
+	解决方法:C3效果transform:translateY(150rpx)向下移动
+  动态更新元素位置
+	距离:手指移动的当前位置 - 手指按下的位置
+		event.touches		->收集屏幕上所有的手指
+		event.changedTouches	->收集屏幕上所有正在变化的手指
+		event.touches[0].clientY	->手指与屏幕顶端的距离
+	视图会随着数据(距离)发生变化	->	距离的数据添加到data中
+
+  边界值	->不能向上移动&&超过80也不继续移动
+  需求:当手指抬起时,需要让元素回到初始位置	->	将移动距离改为0
+
+2.login页面
+	收集用户数据
+		问题:无法像Vue或者React一样,往事件回调中传参
+		解决:通过自定义属性解决->event.currentTarget.dataset
+
+	event.target和event.currentTarget
+	event.target	->	触发者
+	event.currentTarget	->	事件源
+
+	弹出提示框(API组件)
+	wx.showToast({
+		title:"提示内容",
+		icon:"none"
+	})
+	icon	->success/loading/none
+		->none可以显示两行文本,success只能显示一行(7个汉字)
+
+	跳转tabBar页面	->	wx.switchTab
