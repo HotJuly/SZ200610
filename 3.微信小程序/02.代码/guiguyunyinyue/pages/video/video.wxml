@@ -1,2 +1,21 @@
-<!--pages/video/video.wxml-->
-<text>pages/video/video.wxml</text>
+<view class="videoContainer">
+  <view class="header">
+    <image src="/images/video/video.jpg"></image>
+    <input class="search" placeholder="光辉岁月" placeholder-class="placeholder"></input>
+    <image src="/images/logo.png"></image>
+  </view>
+  <scroll-view class="navScroll" 
+    enable-flex 
+    scroll-x>
+    <view
+      class="navItem {{currentId===item.id?'active':''}}"
+      wx:for="{{navList}}"
+      wx:key="id"
+      id="{{item.id}}"
+      data-id="{{item.id}}"
+      bindtap="changeId"
+    >
+      <text>{{item.name}}</text>
+    </view>
+  </scroll-view>
+</view>

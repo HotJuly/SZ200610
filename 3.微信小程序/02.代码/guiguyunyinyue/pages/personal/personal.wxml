@@ -67,7 +67,10 @@
           <!-- 写法二:配合flex-shrink:0
             <image src="/images/nvsheng.jpg"></image>
            -->
-          <!-- <image src="{{item.song.al.picUrl}}" wx:key="id" wx:for="{{playList}}"></image> -->
+
+          <!-- wx:key会递归去找属性
+            <image src="{{item.song.al.picUrl}}" wx:key="id" wx:for="{{playList}}"></image> 
+          -->
 
           <image src="{{item.url}}" wx:key="id" wx:for="{{playList}}"></image>
         </scroll-view>
