@@ -64,6 +64,7 @@
 .videoList{
   padding-top:40rpx;
   /* header高度+nav高度+scroll-view高度=屏幕的100%高度 */
+  /* height: calc(100vh - 72rpx - 100rpx - 40rpx) */
   height: calc(100vh - 72rpx - 100rpx - 40rpx)
 }
 

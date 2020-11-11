@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function a(){
+            await new Promise((resolve,reject)=>{
+                resolve(123)
+            })
+            await new Promise((resolve,reject)=>{
+                reject(234)
+            })
+            console.log(122)
+        }
+        /* async函数返回值是一个promise对象
+            await遇到失败的promise,整个async函数会终止,返回的promise状态会从pending变成失败状态
+            当async函数内部的所有代码,执行完毕,返回的promise对象状态会变成完成状态
+
+            async和await的本意就是以同步的流程,书写异步的代码
+        */
+        var promise = a();
+        console.log(1,promise);
+        setTimeout(()=>{
+            console.log(2,promise);
+        },2000)
+    </script>
+</body>
+</html>

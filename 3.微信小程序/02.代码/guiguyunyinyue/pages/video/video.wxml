@@ -7,13 +7,15 @@
 
   <!-- 导航区域 -->
   <scroll-view class="navScroll" 
+    scroll-into-view="nav{{currentId}}"
+    scroll-with-animation
     enable-flex 
     scroll-x>
     <view
       class="navItem {{currentId===item.id?'active':''}}"
       wx:for="{{navList}}"
       wx:key="id"
-      id="{{item.id}}"
+      id="nav{{item.id}}"
       data-id="{{item.id}}"
       bindtap="changeId"
     >
@@ -22,7 +24,13 @@
   </scroll-view>
 
   <!-- videoList区域 -->
-  <scroll-view class="videoList" scroll-y>
+  <scroll-view class="videoList"
+    bindrefresherrefresh="handlePullDown"
+    bindscrolltolower="handleScrollToLower"
+    refresher-triggered="{{trigger}}"
+    refresher-enabled
+    scroll-y
+   >
     <view class="videoItem" wx:for="{{videoList}}" wx:key="vid">
       <video class="common" src="{{item.urlInfo.url}}"></video>
       <view class="content">{{item.title}}</view>
