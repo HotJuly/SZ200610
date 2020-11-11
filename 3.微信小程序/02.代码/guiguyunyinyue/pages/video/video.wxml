@@ -37,7 +37,16 @@
         src="{{item.urlInfo.url}}"
         bindplay="handlePlay"
         id="{{item.vid}}"
+        poster="{{item.coverUrl}}"
+        wx:if="{{currentVideoId===item.vid}}"
         ></video>
+      <image
+        src="{{item.coverUrl}}"
+        class="common"
+        id="{{item.vid}}"
+        wx:else
+        bindtap="switchVideo"
+        ></image>
       <view class="content">{{item.title}}</view>
       <view class="footer">
         <image class="avatar" src="{{item.creator.avatarUrl}}"></image>

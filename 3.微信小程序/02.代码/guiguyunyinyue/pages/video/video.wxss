@@ -53,6 +53,11 @@
 .videoList .common {
   width: 100%;
   border-radius: 10rpx;
+  /* 
+    width:94vw width:1920 height:1080 
+    94vw*1080/1920  width/height = 1920/1080
+  */
+  height: 52.875vw;
 }
 
 .videoList .videoItem{

@@ -9,7 +9,8 @@ Page({
     navList:[],
     currentId: null,
     videoList:[],
-    trigger:false
+    trigger:false,
+    currentVideoId:null
   },
 
   //用于响应用户点击nav操作
@@ -105,6 +106,25 @@ Page({
     //暂停视频的API:videoContext.pause()
     videoContext.pause();
     console.log('视频暂停成功')
+  },
+
+  //监听用户点击图片,自动切换video组件进行播放
+  switchVideo(event){
+    // console.log('switchVideo')
+    //当用户点击image组件的时候,将image组件的id设置为currentVideoId,从而控制视图更新
+    // console.log(event.currentTarget.id)
+    let currentVideoId = event.currentTarget.id;
+
+    this.setData({
+      currentVideoId
+    })
+
+    //获取到VideoContext实例对象
+    let currentVideoContext = wx.createVideoContext(currentVideoId)
+
+    //通过API让视频播放起来
+    currentVideoContext.play();
+
   },
 
   /**
