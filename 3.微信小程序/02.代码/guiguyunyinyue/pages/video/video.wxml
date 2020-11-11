@@ -2,7 +2,7 @@
   <view class="header">
     <image src="/images/video/video.jpg"></image>
     <input class="search" placeholder="光辉岁月" placeholder-class="placeholder"></input>
-    <image src="/images/logo.png"></image>
+    <image src="/images/logo.png" bindtap="testAPI"></image>
   </view>
 
   <!-- 导航区域 -->
@@ -32,7 +32,12 @@
     scroll-y
    >
     <view class="videoItem" wx:for="{{videoList}}" wx:key="vid">
-      <video class="common" src="{{item.urlInfo.url}}"></video>
+      <video
+        class="common"
+        src="{{item.urlInfo.url}}"
+        bindplay="handlePlay"
+        id="{{item.vid}}"
+        ></video>
       <view class="content">{{item.title}}</view>
       <view class="footer">
         <image class="avatar" src="{{item.creator.avatarUrl}}"></image>

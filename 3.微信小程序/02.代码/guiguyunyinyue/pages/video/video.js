@@ -76,6 +76,37 @@ Page({
     })
   },
 
+  //监听视频播放状态
+  handlePlay(event){
+    // console.log('handlePlay');
+    // console.log(this.oldVideoId);
+
+    //获取当前正在播放视频的id
+    let { id } = event.currentTarget;
+
+    if (this.oldVideoId && this.oldVideoId !== id ) {
+      //根据旧的视频id,创建上下文对象,停止旧的视频的播放
+      let oldVideoContext = wx.createVideoContext(this.oldVideoId);
+
+      oldVideoContext.pause();
+    }
+
+    //当前所有代码执行完毕之后,该视频就变成了下次的旧视频,所以需要记录他的id
+    this.oldVideoId = id;
+  },
+
+  //专门用于测试video暂停功能
+  testAPI(){
+    let videoId = "A964ED1FEEEB9BDC38B855092AF76E9B";
+
+    // wx.createVideoContext(video组件的id) 创建  视频上下文实例对象
+    let videoContext = wx.createVideoContext(videoId);
+
+    //暂停视频的API:videoContext.pause()
+    videoContext.pause();
+    console.log('视频暂停成功')
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
