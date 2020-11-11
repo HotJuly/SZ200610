@@ -58,11 +58,13 @@ Page({
     //1.收集数据
     const {phone,password} = this.data
 
-    //2.发送请求
+    //2.发送登录请求
     let result = await ajax('/login/cellphone',{
       phone,
-      password
+      password,
+      isLogin:true
     })
+    console.log('login',result)
     // console.log(result.profile)
     if (result.code === 200) {
       //登陆成功

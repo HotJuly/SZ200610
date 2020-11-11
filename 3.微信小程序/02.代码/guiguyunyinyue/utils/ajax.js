@@ -17,8 +17,25 @@ export default function (url, data={}, method = "GET") {
       url: config.host + url,
       data,
       method,
+      header:{
+        cookie: JSON.parse(wx.getStorageSync('cookie')||"[]").toString()
+      },
       success: (res) => {
-        // console.log('res', res.data.banners);
+
+        //需要去判断哪个cookie需要缓存
+        //1.length
+        //2.url
+        //3.data
+        if (data.isLogin) {
+          let cookies = res.cookies;
+          // cookies.splice(0,1);
+          //将cookies存储到Storage中
+          wx.setStorage({
+            key: "cookie",
+            data: JSON.stringify(cookies)
+          });
+        }
+
         resolve(res.data);
         // this.setData({
         //   banners: res.data.banners

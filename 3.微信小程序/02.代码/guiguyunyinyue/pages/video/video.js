@@ -35,6 +35,11 @@ Page({
       navList
     })
 
+    //请求视频列表数据
+    let videoListData = await ajax('/video/group',{
+      id: 58100
+    });
+
   },
 
   /**

@@ -1,0 +1,52 @@
+1.数据缓存
+cookie,sessionStorage和localStorage
+生命周期
+	cookie 	不设置超时时间,关闭浏览器立即销毁
+		设置超时时间,超过指定时间就销毁
+	sessionStorage	关闭浏览器立即销毁
+	localStorage	不主动清除,就永久存在
+
+存储位置
+	cookie 	不设置超时时间->内存
+		设置超时时间->硬盘
+	sessionStorage	内存
+	localStorage	硬盘
+
+存储大小
+	cookie 	4KB
+	sessionStorage	5MB
+	localStorage	20MB
+
+与服务器的关系
+	cookie 	服务器创建,浏览器存储,每次发送请求都会自动携带
+	sessionStorage	本地存储,与服务器无关
+	localStorage	本地存储,与服务器无关
+
+使用范围
+	cookie 	当前域名匹配,允许多标签页共享
+	sessionStorage	
+			可以共享->当前域名匹配,window.open(网址的字符串)
+			不能共享->当前域名匹配,通过浏览器地址栏打开的新页面不共享
+	localStorage	当前域名匹配,允许多标签页共享
+
+
+小程序中的数据缓存(Storage持久化存储)
+设置API:	
+	1.wx.setStorage(异步存储)
+	2.wx.setStorageSync(同步存储)
+读取API:	(getStorage和getStorageInfo需要注意)
+	1.wx.getStorage(异步存储)
+	2.wx.getStorageSync(同步存储)
+
+
+2.flex特性	->	flex盒模型会压缩直系子元素,但是子元素最小宽度会与内部最大的子元素一样大
+
+3.如何设置placeholder的样式	->	placeholder-class和placeholder-style
+
+4.splice和slice
+	splice	->	会修改原数组	->	可以实现增删改
+	slice	->	不会修改原数组	->	截取特定长度的数据,返回一个全新的数组
+
+5.标签属性和自定义属性
+	标签属性:	数据类型一定是字符串,例如:id和class
+	自定义属性:	数据类型混合类型,你传入什么,返回的就是什么(原数据)
