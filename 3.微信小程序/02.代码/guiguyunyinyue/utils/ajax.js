@@ -12,6 +12,8 @@ import config from './config.js';
     3.谁调用谁传入
  */ 
 export default function (url, data={}, method = "GET") {
+  const {isLogin} = data;
+  delete data.isLogin;
   return new Promise((resolve,reject)=>{
     wx.request({
       url: config.host + url,
@@ -26,8 +28,17 @@ export default function (url, data={}, method = "GET") {
         //1.length
         //2.url
         //3.data
-        if (data.isLogin) {
+        if (isLogin) {
           let cookies = res.cookies;
+          // cookies=cookies.filter((item)=>{
+          //   return item.indexOf('NMT')!==0;
+          // })
+
+          //仅保留MUSIC开头的cookie
+          cookies = cookies.filter((item)=>{
+            return item.indexOf('MUSIC')===0;
+          })
+
           // cookies.splice(0,1);
           //将cookies存储到Storage中
           wx.setStorage({
