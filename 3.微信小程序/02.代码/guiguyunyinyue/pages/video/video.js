@@ -7,10 +7,11 @@ Page({
    */
   data: {
     navList:[],
-    currentId: 60100
+    currentId: null,
+    videoList:[]
   },
 
-  changeId(event){
+  async changeId(event){
     // console.log(event.currentTarget)
     // id属性值数据类型是字符串,data-id属性值数据类型是原有类型
     let id = event.currentTarget.id;
@@ -18,28 +19,35 @@ Page({
     this.setData({
       currentId:id*1
     })
+    wx.showLoading({
+      title: '加载中,请稍等...'
+    })
+    await this.getVideoList();
+    console.log(2)
+    wx.hideLoading();
+  },
+
+  async getVideoList(){
+    //请求视频列表数据
+    let videoListData = await ajax('/video/group', {
+      id: this.data.currentId
+    });
+
+    console.log(1)
+
+    let videoList = videoListData.datas.map((item) => {
+      return item.data;
+    });
+
+    this.setData({
+      videoList
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad:async function (options) {
-    let result = await ajax('/video/group/list');
-    let navList = result.data.slice(0,14);
-
-    //slice(开始下标,结束下标)->  左闭右包(包括开始的下标元素,不包括结束的)  ->不会对旧数组产生影响,会产生新数组
-    //splice(开始下标,切割数量,替换数据)  ->会对旧数组产生影响
-    // console.log(navList.splice(0, 14,"123"), navList);
-
-    this.setData({
-      navList
-    })
-
-    //请求视频列表数据
-    let videoListData = await ajax('/video/group',{
-      id: 58100
-    });
-
   },
 
   /**
@@ -52,8 +60,23 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow:async function () {
+    let result = await ajax('/video/group/list');
+    let navList = result.data.slice(0, 14);
 
+    //设置默认值,让第一个标签高亮
+    let currentId = navList[0].id;
+
+    //slice(开始下标,结束下标)->  左闭右包(包括开始的下标元素,不包括结束的)  ->不会对旧数组产生影响,会产生新数组
+    //splice(开始下标,切割数量,替换数据)  ->会对旧数组产生影响
+    // console.log(navList.splice(0, 14,"123"), navList);
+
+    this.setData({
+      navList,
+      currentId
+    })
+
+    this.getVideoList();
   },
 
   /**
