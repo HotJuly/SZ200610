@@ -1,0 +1,21 @@
+实现scroll-into-view功能
+组件属性:scroll-into-view="某个标签的id"
+id要求必须以字母开头		->	修改了所有元素的id,添加了nav前缀
+changeId函数中	->	将id获取改为从自定义属性id上获取
+通过data控制scroll-into-view到底显示谁
+
+开启动画	->	组件属性:scroll-with-animation
+
+
+下拉刷新(scroll-view组件)
+	1)开启下拉刷新的C3效果	->	组件属性:refresher-enable
+	2)监听用户下拉操作		->	事件名称:refresherrefresh
+	3)请求最新数据		->	使用函数this.getVideoList实现
+
+	问题:最新数据回来之后,下拉刷新的C3效果不消失
+	解决方法:通过data状态	->	控制组件属性refresher-triggered属性	->设置为false可以关闭动画效果
+
+上拉加载更多(scroll-view)
+	1)监听用户上拉触底操作	->	事件名称:scrolltolower
+	2)请求更多数据	->	模拟数据
+	3)保留用户之前的videoList数据	->	数组合并
