@@ -19,6 +19,7 @@
       <view class="recommendItem" 
         bindtap="toSong"
         data-id="{{item.id}}"
+        data-index="{{index}}"
         wx:for="{{recommendList}}" 
         wx:key="id">
         <image src="{{item.album.picUrl}}"></image>

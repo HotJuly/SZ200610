@@ -1,4 +1,5 @@
 // pages/song/song.js
+import PubSub from 'pubsub-js'
 import ajax from '../../utils/ajax.js'
 let appInstance = getApp();
 Page({
@@ -74,6 +75,64 @@ Page({
     // console.log('url', url)
   },
 
+  //专门用于监听背景音频的播放状态
+  addAudioEvent(){
+
+    /*
+      监听背景音频的播放
+        1.获取到背景音频管理器的实例
+          通过wx.getBackgroundAudioManager()
+        2.绑定Play事件
+    */
+
+    // this.backgroundAudioManager = wx.getBackgroundAudioManager();
+
+    //监听背景音频是否处于播放状态
+    this.backgroundAudioManager.onPlay(() => {
+      // console.log('onPlay')
+      this.setData({
+        isplaying: true
+      })
+
+      appInstance.globalData.audioPlayState = true;
+    })
+
+    //监听背景音频是否处于暂停状态
+    this.backgroundAudioManager.onPause(() => {
+      // console.log('onPause')
+      this.setData({
+        isplaying: false
+      })
+
+      appInstance.globalData.audioPlayState = false;
+    })
+  },
+
+  //用于监听用户点击上一首/下一首按钮,切换歌曲功能
+  switchSong(event){
+    /*
+      1.区分清楚用户触发的是上一首还是下一首
+      2.song页面将需要的数据类型(上一首或者下一首),告知(发布)每日推荐页面
+    */
+    let { id } = event.currentTarget;
+    // console.log(id)
+    PubSub.publish('switchType',id)
+  },
+
+  async getAudioDetail(){
+    //请求歌曲详细信息(不包括音频链接)
+    let songDetailInfo = await ajax('/song/detail', {
+      ids: this.data.songId
+    });
+    this.setData({
+      songObj: songDetailInfo.songs[0]
+    });
+    // 通过js代码设置当前页面导航栏标题
+    wx.setNavigationBarTitle({
+      title: this.data.songObj.name
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -87,20 +146,12 @@ Page({
      */
     // console.log('options',options)
     let {id} = options;
-
-    //请求歌曲详细信息(不包括音频链接)
-    let songDetailInfo = await ajax('/song/detail',{
-      ids:id
-    });
     this.setData({
-      songObj: songDetailInfo.songs[0],
-      songId:id
-    });
-
-    // 通过js代码设置当前页面导航栏标题
-    wx.setNavigationBarTitle({
-      title: this.data.songObj.name
+      songId: id
     })
+
+    //请求歌曲详细信息
+    await this.getAudioDetail();
 
     /*
       判断当前歌曲和上次正在播放的歌曲是否是同一首歌
@@ -112,33 +163,34 @@ Page({
       })
     }
 
-    /*
-      监听背景音频的播放
-        1.获取到背景音频管理器的实例
-          通过wx.getBackgroundAudioManager()
-        2.绑定Play事件
-    */
 
     this.backgroundAudioManager = wx.getBackgroundAudioManager();
 
-    //监听背景音频是否处于播放状态
-    this.backgroundAudioManager.onPlay(() =>{
-      // console.log('onPlay')
+    // 给背景音频绑定监听
+    this.addAudioEvent();
+
+    PubSub.subscribe('sendSongId',async (msg,data)=>{
+      console.log(msg, data)
+      /*
+        1.终于获取到songId了,更新到data中
+          this.setData
+        2.获取歌曲详细信息
+          this.getAudioDetail();
+        3.获取音频链接
+          this.getAudioUrl()
+        4.播放音频
+          this.handlePlay()
+      */
       this.setData({
-        isplaying:true
+        songId: data,
+        isplaying:false
       })
 
-      appInstance.globalData.audioPlayState = true;
-    })
+      await this.getAudioDetail();
 
-    //监听背景音频是否处于暂停状态
-    this.backgroundAudioManager.onPause(() =>{
-      // console.log('onPause')
-      this.setData({
-        isplaying: false
-      })
+      // await this.getAudioUrl();
 
-      appInstance.globalData.audioPlayState = false;
+      this.handlePlay();
     })
 
     // console.log(appInstance)
