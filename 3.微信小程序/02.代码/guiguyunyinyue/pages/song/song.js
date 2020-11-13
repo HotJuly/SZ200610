@@ -29,10 +29,11 @@ Page({
         如果当前页面正处于暂停状态,再次点击播放按钮,应该开始音频播放和页面动画
     */
 
-    let backgroundAudioManager = wx.getBackgroundAudioManager();
+    //  由于经常使用该实例,所以在onLoad的时候,直接获取该实例并保存在this身上
+    // let backgroundAudioManager = wx.getBackgroundAudioManager();
     if (this.data.isplaying){
       //isplaying为true就代表页面处于播放
-      backgroundAudioManager.pause();
+      this.backgroundAudioManager.pause();
       this.setData({
         isplaying: false
       })
@@ -46,8 +47,8 @@ Page({
       await this.getAudioUrl();
 
       // 2.播放音频
-      backgroundAudioManager.src = this.data.musicUrl;
-      backgroundAudioManager.title = this.data.songObj.name;
+      this.backgroundAudioManager.src = this.data.musicUrl;
+      this.backgroundAudioManager.title = this.data.songObj.name;
 
       //3.让页面进入播放状态->通过状态控制页面是否要增加isplaying类名,从而控制页面的动画
       this.setData({
@@ -110,6 +111,37 @@ Page({
         isplaying:true
       })
     }
+
+    /*
+      监听背景音频的播放
+        1.获取到背景音频管理器的实例
+          通过wx.getBackgroundAudioManager()
+        2.绑定Play事件
+    */
+
+    this.backgroundAudioManager = wx.getBackgroundAudioManager();
+
+    //监听背景音频是否处于播放状态
+    this.backgroundAudioManager.onPlay(() =>{
+      // console.log('onPlay')
+      this.setData({
+        isplaying:true
+      })
+
+      appInstance.globalData.audioPlayState = true;
+    })
+
+    //监听背景音频是否处于暂停状态
+    this.backgroundAudioManager.onPause(() =>{
+      // console.log('onPause')
+      this.setData({
+        isplaying: false
+      })
+
+      appInstance.globalData.audioPlayState = false;
+    })
+
+    // console.log(appInstance)
 
     // 读取十分方便
     // console.log(appInstance)
