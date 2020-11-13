@@ -1,32 +1,18 @@
-// pages/recommendSong/recommendSong.js
-import ajax from '../../utils/ajax.js';
+// pages/song/song.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    month:"",
-    day:"",
-    recommendList:[]
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: async function (options) {
-    // console.log(new Date().getDate())
-    // console.log(new Date().getMonth()+1)
-    //获取当前最新时间,并更新到状态中
-    this.setData({
-      day: new Date().getDate(),
-      month: new Date().getMonth() + 1
-    })
-    let result = await  ajax('/recommend/songs');
-    // console.log(result)
-    this.setData({
-      recommendList: result.recommend
-    })
+  onLoad: function (options) {
+
   },
 
   /**

@@ -1,0 +1,109 @@
+.songContainer{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  height:100%;
+  background-color: rgba(0,0,0,.5);
+}
+
+.keng{
+  width:60rpx;
+  height:60rpx;
+  background: white;
+  border-radius: 50%;
+  z-index:11;
+}
+
+.needle{
+  position: relative;
+  left:58rpx;
+  top:-36rpx;
+  width:192rpx;
+  height:274rpx;
+  /* z-index想要生效需要定位或者父元素开启flex */
+  z-index:10;
+  /* 控制指针围绕Z轴旋转,当进入播放状态,回到0deg即可 */
+  transform:rotateZ(-20deg);
+  /* 设置旋转中心点 */
+  transform-origin: 40rpx 0;
+  transition:transform 1s;
+}
+
+.isplaying .needle{
+  transform:rotateZ(0deg);
+}
+
+.discContainer{
+  position:relative;
+  top:-180rpx;
+  width:598rpx;
+  height:598rpx;
+  /* 旋转圈数不定 */
+  /* transform:rotateZ(3600deg); */
+  transition:transform 1s;
+  /* animation:关键帧动画名称 执行周期 动画运行方式  执行次数*/
+  animation: discRotate 4s linear infinite;
+  /* animation-play-state running paused */
+  animation-play-state: paused;
+}
+
+.isplaying .discContainer{
+  /* 需要让光碟容器转起来 */
+   animation-play-state: running;
+}
+
+@keyframes discRotate{
+  /* 设置时间的方法
+    百分比  0% 50% 100%
+   */
+   from{
+     transform: rotateZ(0deg);
+   }
+
+   to{
+     transform: rotateZ(360deg)
+   }
+}
+
+.discContainer .disc{
+  position: relative;
+  width:100%;
+  height:100%;
+  z-index:9;
+}
+
+.discContainer .songImg{
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+  width:370rpx;
+  height:370rpx;
+  z-index:8;
+}
+
+
+/* musicControl */
+.musicControl {
+  position: absolute;
+  bottom: 40rpx;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1rpx solid #fff;
+}
+
+.musicControl text {
+  width: 20%;
+  text-align: center;
+  font-size: 50rpx;
+  color: #fff;
+  height: 120rpx;
+  line-height: 120rpx;
+}
+.musicControl text.big {
+  font-size: 80rpx;
+}
