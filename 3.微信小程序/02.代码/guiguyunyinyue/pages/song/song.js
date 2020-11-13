@@ -1,4 +1,5 @@
 // pages/song/song.js
+import ajax from '../../utils/ajax.js'
 Page({
 
   /**
@@ -11,8 +12,28 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad:async function (options) {
+    /* 
+      1.需要请求歌曲的详细信息
+        1)发送请求
+          缺少歌曲id
+        2)获取歌曲id
+          通过路由query传参,传递给onLoad的形参options
+     */
+    console.log('options',options)
+    let {id} = options;
+    let songDetailInfo = await ajax('/song/detail',{
+      ids:id
+    });
+    this.setData({
+      songObj: songDetailInfo.songs[0],
+      songId:id
+    });
 
+    // 通过js代码设置当前页面导航栏标题
+    wx.setNavigationBarTitle({
+      title: this.data.songObj.name
+    })
   },
 
   /**

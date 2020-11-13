@@ -1,13 +1,13 @@
 <view class="songContainer">
   <view class="name">
-    周深
+    {{songObj.ar[0].name}}
   </view>
   <view class="keng">
   </view>
   <image class="needle" src="/images/song/needle.png"></image>
   <view class="discContainer">
     <image class="disc" src="/images/song/disc.png"></image>
-    <image class="songImg" src="/images/nvsheng.jpg"></image>
+    <image class="songImg" src="{{songObj.al.picUrl}}"></image>
   </view>
 
 

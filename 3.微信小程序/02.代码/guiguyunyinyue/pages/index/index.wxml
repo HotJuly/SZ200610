@@ -18,7 +18,7 @@
 
   <!-- 导航区域 -->
   <view class="navContainer">
-    <view class="navItem">
+    <view class="navItem" bindtap="toRecommendSong">
       <view class="iconfont  icon-meirituijian-"></view>
       <text>每日推荐</text>
     </view>
