@@ -1,5 +1,6 @@
 // pages/song/song.js
 import ajax from '../../utils/ajax.js'
+let appInstance = getApp();
 Page({
 
   /**
@@ -35,6 +36,9 @@ Page({
       this.setData({
         isplaying: false
       })
+
+      // appInstance.globalData.audioId = this.data.songId;
+      appInstance.globalData.audioPlayState = false;
     } else {
       //isplaying为false就代表页面处于暂停
 
@@ -49,6 +53,9 @@ Page({
       this.setData({
         isplaying: true
       })
+
+      appInstance.globalData.audioId = this.data.songId;
+      appInstance.globalData.audioPlayState = true;
     }
     
   },
@@ -93,6 +100,26 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.songObj.name
     })
+
+    /*
+      判断当前歌曲和上次正在播放的歌曲是否是同一首歌
+     */
+    let { audioId,audioPlayState } = appInstance.globalData;
+    if (id === appInstance.globalData.audioId && audioPlayState){
+      this.setData({
+        isplaying:true
+      })
+    }
+
+    // 读取十分方便
+    // console.log(appInstance)
+     
+    // console.log(appInstance.globalData.msg)
+
+    // 修改也十分方便
+    // appInstance.globalData.msg="我是修改之后的全局数据"
+
+    // console.log(appInstance.globalData.msg)
 
   },
 

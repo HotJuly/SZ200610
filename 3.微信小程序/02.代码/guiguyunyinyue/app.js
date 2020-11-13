@@ -33,7 +33,9 @@ App({
       }
     })
   },
-  globalData: {
-    userInfo: null
+  globalData:{
+    msg:"我是全局的数据",
+    audioId:null,
+    audioPlayState:false
   }
 })
