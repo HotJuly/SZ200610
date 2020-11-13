@@ -1,5 +1,6 @@
 // pages/song/song.js
 import PubSub from 'pubsub-js'
+import moment from 'moment'
 import ajax from '../../utils/ajax.js'
 let appInstance = getApp();
 Page({
@@ -11,7 +12,10 @@ Page({
     songId:"",
     songObj:{},
     musicUrl:"",
-    isplaying:false
+    isplaying:false,
+    durationTime:0,
+    currentTime:"00:00",
+    currentWidth:0
   },
 
   //响应用户点击播放按钮的操作
@@ -106,6 +110,21 @@ Page({
 
       appInstance.globalData.audioPlayState = false;
     })
+
+
+
+    //监听背景音频进度是否正在更新
+    this.backgroundAudioManager.onTimeUpdate(() => {
+      console.log('onTimeUpdate')
+      /*
+        1.更新当前时间
+        2.更新进度条
+      */
+      this.setData({
+        currentTime: moment(this.backgroundAudioManager.currentTime*1000).format('mm:ss'),
+        currentWidth: this.backgroundAudioManager.currentTime / this.backgroundAudioManager.duration *100
+      })
+    })
   },
 
   //用于监听用户点击上一首/下一首按钮,切换歌曲功能
@@ -125,7 +144,8 @@ Page({
       ids: this.data.songId
     });
     this.setData({
-      songObj: songDetailInfo.songs[0]
+      songObj: songDetailInfo.songs[0],
+      durationTime: moment(songDetailInfo.songs[0].dt).format("mm:ss")
     });
     // 通过js代码设置当前页面导航栏标题
     wx.setNavigationBarTitle({

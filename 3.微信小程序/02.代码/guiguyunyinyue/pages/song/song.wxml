@@ -10,6 +10,16 @@
     <image class="songImg" src="{{songObj.al.picUrl}}"></image>
   </view>
 
+  <!-- 进度条 -->
+  <view class="audioContainer">
+    <text>{{currentTime}}</text>
+    <view class="barContainer">
+      <view class="audio-current-time" style="width:{{currentWidth}}%">
+        <view class="audio-time-point"></view>
+      </view>
+    </view>
+    <text>{{durationTime}}</text>
+  </view>
 
   
   <!-- 底部播放选项区域 -->
