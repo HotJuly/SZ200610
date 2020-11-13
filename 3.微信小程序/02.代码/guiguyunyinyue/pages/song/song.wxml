@@ -1,4 +1,4 @@
-<view class="songContainer">
+<view class="songContainer {{isplaying?'isplaying':''}}">
   <view class="name">
     {{songObj.ar[0].name}}
   </view>
@@ -15,9 +15,9 @@
   <!-- 底部播放选项区域 -->
   <view class="musicControl">
     <text class="iconfont icon-iconsMusicyemianbofangmoshiShuffle" ></text>
-    <text class="iconfont icon-shangyishou" bindtap="switchSong" id="pre"></text>
+    <text class="iconfont icon-shangyishou"></text>
     <text class="iconfont {{isplaying?'icon-zanting':'icon-bofang'}} big" bindtap="handlePlay"></text>
-    <text class="iconfont icon-next" bindtap="switchSong" id="next"></text>
+    <text class="iconfont icon-next"></text>
     <text class="iconfont icon-iconsMusicyemianbofangmoshiPlayList"></text>
   </view>
 </view>

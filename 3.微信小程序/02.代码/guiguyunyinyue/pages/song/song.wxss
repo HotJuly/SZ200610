@@ -40,7 +40,8 @@
   height:598rpx;
   /* 旋转圈数不定 */
   /* transform:rotateZ(3600deg); */
-  transition:transform 1s;
+  /* transition:transform 1s; */
+  
   /* animation:关键帧动画名称 执行周期 动画运行方式  执行次数*/
   animation: discRotate 4s linear infinite;
   /* animation-play-state running paused */

@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/recommendSong/recommendSong",
     "pages/index/index",
     "pages/song/song",
     "pages/video/video",
     "pages/personal/personal",
-    "pages/login/login",
-    "pages/recommendSong/recommendSong"
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -37,6 +37,9 @@
       }
     ]
   },
+  "requiredBackgroundModes":[
+    "audio"
+  ],
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }
