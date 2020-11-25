@@ -18,13 +18,24 @@
   margin: 0 20rpx;
 }
 .indexContainer .header .search {
+  position: relative;
   width: 100%;
   background: #ededed;
+  padding-left: 60rpx;
+}
+.indexContainer .header .search .iconfont {
+  position: absolute;
+  left: 20rpx;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
 }
 .indexContainer .header .search .placeholder {
   font-size: 24rpx;
   color: #333;
   text-align: center;
+  text-indent: -40rpx;
 }
 .indexContainer .header .username {
   width: 144rpx;
