@@ -131,85 +131,64 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 26));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _ajax = _interopRequireDefault(__webpack_require__(/*! ../../utils/ajax.js */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 {
   data: function data() {
-    return {};
+    return {
+      indexDatas: {} };
 
-  } };exports.default = _default;
+  },
+  /*
+     	1.往哪发
+     		根据自己服务器配置的路由来确定
+     	2.在哪发
+     		如果是Vue项目	->	created或者mounted	->	组件挂载结束
+     		如果是小程序		->	onLoad(created)	->	页面开始加载
+     		1.从速度上来说onLoad优先于mounted
+     		2.无论是uniapp还是mpvue等框架,都更加推荐使用小程序的生命周期
+     		
+     		uniapp支持小程序的组件,小程序的生命周期
+     	3.怎么发
+     		Vue	->	ajax(axios)
+     		小程序->wx.request()
+     		uni-app->uni.request()
+     */
+  // mounted(){
+  //  console.log('mounted')
+  // },
+  onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var indexDatas;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              console.log('onLoad');
+              //想要得到promise的value值,要么async和await或者then方法
+              // let indexDatas = await ajax('http://localhost:3000/getIndexDatas');
+              _context.next = 3;return (0, _ajax.default)('/getIndexDatas');case 3:indexDatas = _context.sent;
+              // console.log('indexDatas',indexDatas)
+              this.indexDatas = indexDatas;case 5:case "end":return _context.stop();}}}, _callee, this);}));function onLoad() {return _onLoad.apply(this, arguments);}return onLoad;}() };exports.default = _default;
 
 /***/ }),
 /* 21 */

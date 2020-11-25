@@ -9,60 +9,12 @@
 			<button class="username">七月</button>
 		</view>
 		
-		<scroll-view scroll-x="true" class="navScroll">
+		<scroll-view scroll-x="true" class="navScroll" v-if="indexDatas.kingKongModule">
 			<view class="scrollItem active">
 				推荐
 			</view>
-			<view class="scrollItem">
-				美食酒水
-			</view>
-			<view class="scrollItem">
-				服饰鞋包
-			</view>
-			<view class="scrollItem">
-				推荐
-			</view>
-			<view class="scrollItem">
-				美食酒水
-			</view>
-			<view class="scrollItem">
-				服饰鞋包
-			</view>
-			<view class="scrollItem">
-				推荐
-			</view>
-			<view class="scrollItem">
-				美食酒水
-			</view>
-			<view class="scrollItem">
-				服饰鞋包
-			</view>
-			<view class="scrollItem">
-				推荐
-			</view>
-			<view class="scrollItem">
-				美食酒水
-			</view>
-			<view class="scrollItem">
-				服饰鞋包
-			</view>
-			<view class="scrollItem">
-				推荐
-			</view>
-			<view class="scrollItem">
-				美食酒水
-			</view>
-			<view class="scrollItem">
-				服饰鞋包
-			</view>
-			<view class="scrollItem">
-				推荐
-			</view>
-			<view class="scrollItem">
-				美食酒水
-			</view>
-			<view class="scrollItem">
-				服饰鞋包
+			<view class="scrollItem" v-for="(item,index) in indexDatas.kingKongModule.kingKongList" :key="item.L1Id">
+				{{item.text}}
 			</view>
 		</scroll-view>
 		
@@ -72,11 +24,40 @@
 </template>
 
 <script>
+	import ajax from '../../utils/ajax.js';
 	export default {
 		data() {
 			return {
+				indexDatas:{}
 			}
 		},
+		/*
+			1.往哪发
+				根据自己服务器配置的路由来确定
+			2.在哪发
+				如果是Vue项目	->	created或者mounted	->	组件挂载结束
+				如果是小程序		->	onLoad(created)	->	页面开始加载
+				1.从速度上来说onLoad优先于mounted
+				2.无论是uniapp还是mpvue等框架,都更加推荐使用小程序的生命周期
+				
+				uniapp支持小程序的组件,小程序的生命周期
+			3.怎么发
+				Vue	->	ajax(axios)
+				小程序->wx.request()
+				uni-app->uni.request()
+		*/
+	   // mounted(){
+		  //  console.log('mounted')
+	   // },
+	   async onLoad(){
+		   console.log('onLoad')
+		   //想要得到promise的value值,要么async和await或者then方法
+		   // let indexDatas = await ajax('http://localhost:3000/getIndexDatas');
+		   let indexDatas = await ajax('/getIndexDatas');
+		   // console.log('indexDatas',indexDatas)
+		   this.indexDatas=indexDatas;
+	   }
+	   
 	}
 </script>
 
@@ -94,6 +75,7 @@
 			.search
 				position relative
 				width 100%
+				height 60upx
 				background #ededed
 				padding-left 60upx
 				.iconfont
@@ -101,11 +83,13 @@
 					left 20upx
 					top 50%
 					transform translateY(-50%)
-				.placeholder
-					font-size 24upx
-					color #333
-					text-align center
-					text-indent -40upx
+				input
+					height 60upx
+					.placeholder
+						font-size 24upx
+						color #333
+						text-align center
+						text-indent -40upx
 			.username
 				width 144upx
 				height 60upx

@@ -20,6 +20,7 @@
 .indexContainer .header .search {
   position: relative;
   width: 100%;
+  height: 60rpx;
   background: #ededed;
   padding-left: 60rpx;
 }
@@ -31,7 +32,10 @@
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
 }
-.indexContainer .header .search .placeholder {
+.indexContainer .header .search input {
+  height: 60rpx;
+}
+.indexContainer .header .search input .placeholder {
   font-size: 24rpx;
   color: #333;
   text-align: center;

@@ -72,5 +72,17 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true
-    }
+    },
+	"h5":{
+		"devServer":{
+			"port":8003,
+			"proxy": {
+			  "/api": {
+			    "target": "http://localhost:3000",
+			    "pathRewrite": {"^/api" : ""}
+			  }
+			}
+		}
+	}
+	
 }
