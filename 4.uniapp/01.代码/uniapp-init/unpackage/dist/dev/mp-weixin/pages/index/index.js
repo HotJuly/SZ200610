@@ -146,17 +146,70 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
-    return {
-      title: 'Hello1' };
+    return {};
 
-  },
-  onLoad: function onLoad() {
-
-  },
-  methods: {} };exports.default = _default;
+  } };exports.default = _default;
 
 /***/ }),
 /* 21 */

@@ -8,6 +8,64 @@
 			</view>
 			<button class="username">七月</button>
 		</view>
+		
+		<scroll-view scroll-x="true" class="navScroll">
+			<view class="scrollItem active">
+				推荐
+			</view>
+			<view class="scrollItem">
+				美食酒水
+			</view>
+			<view class="scrollItem">
+				服饰鞋包
+			</view>
+			<view class="scrollItem">
+				推荐
+			</view>
+			<view class="scrollItem">
+				美食酒水
+			</view>
+			<view class="scrollItem">
+				服饰鞋包
+			</view>
+			<view class="scrollItem">
+				推荐
+			</view>
+			<view class="scrollItem">
+				美食酒水
+			</view>
+			<view class="scrollItem">
+				服饰鞋包
+			</view>
+			<view class="scrollItem">
+				推荐
+			</view>
+			<view class="scrollItem">
+				美食酒水
+			</view>
+			<view class="scrollItem">
+				服饰鞋包
+			</view>
+			<view class="scrollItem">
+				推荐
+			</view>
+			<view class="scrollItem">
+				美食酒水
+			</view>
+			<view class="scrollItem">
+				服饰鞋包
+			</view>
+			<view class="scrollItem">
+				推荐
+			</view>
+			<view class="scrollItem">
+				美食酒水
+			</view>
+			<view class="scrollItem">
+				服饰鞋包
+			</view>
+		</scroll-view>
+		
 	</view>
 	<!-- <div class="indexContainer">indexContainer</div> -->
 	
@@ -17,15 +75,8 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello1'
 			}
 		},
-		onLoad() {
-
-		},
-		methods: {
-
-		}
 	}
 </script>
 
@@ -62,4 +113,26 @@
 				color red
 				flex-shrink 0
 				margin 0 20upx
+		.navScroll
+			// display flex
+			white-space nowrap
+			// height 300upx
+			.scrollItem
+				position relative
+				display inline-block
+				width 140upx
+				height 80upx
+				font-size 28upx
+				text-align center
+				line-height 80upx
+				margin 0 10upx
+				&.active::after
+					position absolute
+					left 0
+					bottom 2upx
+					content ""
+					display block
+					height 2upx
+					width 100%
+					background-color red
 </style>
