@@ -1,0 +1,9 @@
+1.编译成H5项目
+	工具->设置->运行配置->
+	浏览器运行配置->配置chorme地址(C:/Program Files (x86)/Google/Chrome/Application/chrome.exe)
+
+2.编译成小程序项目
+	工具->设置->运行配置->
+	1)HBuilderX内部->小程序运行配置->微信开发者工具路径(F:/devtool/微信web开发者工具)
+	2)微信开发者工具内部->设置->安全设置->服务端口(默认关闭,将他开启即可)
+	

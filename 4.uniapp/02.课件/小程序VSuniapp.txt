@@ -1,0 +1,24 @@
+小程序
+project.config.js	->	项目说明,配置
+sitemap.json	->	负责项目索引规则
+app.js	->	App({})	->	注册小程序(有且只能调用一次)
+app.wxss	->	全局样式,公共样式
+app.json	->	page注册路由(String[ ]),window样式配置,	tabbar配置,分包,分包预加载
+
+pages文件夹	->	存放所有页面
+index.wxml	->	结构
+index.wxss	->	样式
+index.js		->	行为	->	Page({})	->注册页面
+index.json		->	配置当前页面的导航条等,声明只用的组件路径和名称usingComponents
+
+
+uniapp
+mainfest.json	->	project.config.js	->项目说明和项目配置
+	注意:小程序的appid必须配置,别填写成uniapp的appid
+
+pages.json	->	app.json+所有页面的json文件
+
+main.js+App.vue	->	app.wxss+app.js
+
+index.vue		->	index.wxml+index.js+index.wxss
+
