@@ -1,0 +1,29 @@
+.categorysContainer >image {
+  width: 100%;
+  height: 370rpx;
+}
+.categorysContainer .categoryScroll {
+  white-space: nowrap;
+  height: 370rpx;
+  padding: 20rpx 0;
+}
+.categorysContainer .categoryScroll .category {
+  display: inline-block;
+  width: 200rpx;
+  margin: 0 20rpx;
+  vertical-align: top;
+}
+.categorysContainer .categoryScroll .category image {
+  width: 200rpx;
+  height: 200rpx;
+  background: #eee;
+}
+.categorysContainer .categoryScroll .category text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: pre-wrap;
+  overflow: hidden;
+  font-size: 24rpx;
+}
+

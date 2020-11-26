@@ -105,46 +105,52 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Categorys = function Categorys() {return __webpack_require__.e(/*! import() | components/Categorys/Categorys */ "components/Categorys/Categorys").then(__webpack_require__.bind(null, /*! ../Categorys/Categorys.vue */ 42));};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   props: {
-    indexDatas: Object } };exports.default = _default;
+    indexDatas: Object },
+
+  components: {
+    Categorys: Categorys } };exports.default = _default;
 
 /***/ }),
 

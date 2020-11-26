@@ -10365,7 +10365,7 @@ var index_esm = {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));var _ajax = _interopRequireDefault(__webpack_require__(/*! ../../utils/ajax.js */ 24));
-var _mutationTypes = __webpack_require__(/*! ../mutation-types.js */ 41);var _mutations;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _mutationTypes = __webpack_require__(/*! ../mutation-types.js */ 41);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 
 
@@ -10374,40 +10374,40 @@ var state = {
   num: 0 };
 
 
-var mutations = (_mutations = {}, _defineProperty(_mutations,
+var mutations = _defineProperty({},
 _mutationTypes.SETINDEXDATAS, function (state, _ref) {var indexDatas = _ref.indexDatas,num = _ref.num;
   state.indexDatas = indexDatas;
   // console.log(indexDatas,num)
-}), _defineProperty(_mutations, "set1", function set1(
-state) {
-  // setTimeout(()=>{
-  state.num = 1;
-  // },1000)
-}), _defineProperty(_mutations, "set2", function set2(
-state) {
-  // setTimeout(()=>{
-  state.num = 2;
-  // },1000)
+});
 
-}), _defineProperty(_mutations, "setA", function setA()
 
-{
-  console.log('这是a程序员定义的mutation');
-}), _defineProperty(_mutations, "setA", function setA()
 
-{
-  console.log('这是b程序员定义的mutation');
-}), _mutations);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 var actions = {
   getIndexDatas: function () {var _getIndexDatas = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(store) {var indexDatas;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                 (0, _ajax.default)('/getIndexDatas'));case 2:indexDatas = _context.sent;
               // console.log(store)
-              // store.commit('setIndexDatas',{indexDatas,num:2})
-              store.state.indexDatas = indexDatas;
-              console.log(store);case 5:case "end":return _context.stop();}}}, _callee, this);}));function getIndexDatas(_x) {return _getIndexDatas.apply(this, arguments);}return getIndexDatas;}() };
-
+              store.commit('setIndexDatas', { indexDatas: indexDatas, num: 2 });
+              // store.state.indexDatas=indexDatas;
+              // console.log(store)
+            case 4:case "end":return _context.stop();}}}, _callee, this);}));function getIndexDatas(_x) {return _getIndexDatas.apply(this, arguments);}return getIndexDatas;}() };
 
 
 var getters = {};var _default =

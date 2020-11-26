@@ -31,13 +31,19 @@
 				<text>{{item.text}}</text>
 			</view>
 		</view>
+		
+		<Categorys :categorys="categorys" v-for="categorys in indexDatas.categoryModule" :key="categorys.titlePicUrl"/>
 	</view>
 </template>
 
 <script>
+	import Categorys from '../Categorys/Categorys.vue';
 	export default{
 		props:{
 			indexDatas:Object
+		},
+		components:{
+			Categorys
 		}
 	}
 </script>

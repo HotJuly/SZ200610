@@ -1,0 +1,1 @@
+<view class="categorysContainer"><image src="{{categorys.titlePicUrl}}" mode></image><scroll-view class="categoryScroll" scroll-x="true"><block wx:for="{{categorys.itemList}}" wx:for-item="category" wx:for-index="__i0__" wx:key="id"><view class="category"><image src="{{category.showPicUrl}}" mode></image><text>{{category.name}}</text></view></block></scroll-view></view>

@@ -13,34 +13,34 @@ const mutations ={
 		state.indexDatas=indexDatas;
 		// console.log(indexDatas,num)
 	},
-	set1(state){
-		// setTimeout(()=>{
-			state.num=1
-		// },1000)
-	},
-	set2(state){
-		// setTimeout(()=>{
-			state.num=2
-		// },1000)
+	// set1(state){
+	// 	// setTimeout(()=>{
+	// 		state.num=1
+	// 	// },1000)
+	// },
+	// set2(state){
+	// 	// setTimeout(()=>{
+	// 		state.num=2
+	// 	// },1000)
 		
-	},
+	// },
 	
-	setA(){
-		console.log('这是a程序员定义的mutation')
-	},
-	// ......1000行代码
-	setA(){
-		console.log('这是b程序员定义的mutation')
-	}
+	// setA(){
+	// 	console.log('这是a程序员定义的mutation')
+	// },
+	// // ......1000行代码
+	// setA(){
+	// 	console.log('这是b程序员定义的mutation')
+	// }
 }
 
 const actions ={
 	async getIndexDatas(store){
 		let indexDatas = await ajax('/getIndexDatas');
 		// console.log(store)
-		// store.commit('setIndexDatas',{indexDatas,num:2})
-		store.state.indexDatas=indexDatas;
-		console.log(store)
+		store.commit('setIndexDatas',{indexDatas,num:2})
+		// store.state.indexDatas=indexDatas;
+		// console.log(store)
 	}
 }
 
