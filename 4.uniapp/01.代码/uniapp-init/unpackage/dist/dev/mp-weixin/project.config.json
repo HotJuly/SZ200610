@@ -6,10 +6,25 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
-		"postcss": false
+		"enhance": false,
+		"postcss": false,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.0",
+	"libVersion": "2.14.0",
 	"appid": "wxe5931a68ea66cece",
 	"projectname": "uniapp-init",
 	"simulatorType": "wechat",

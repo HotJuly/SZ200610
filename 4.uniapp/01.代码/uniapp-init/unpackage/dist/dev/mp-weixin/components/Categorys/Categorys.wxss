@@ -1,4 +1,4 @@
-.categorysContainer >image {
+.categorysContainer >.titlePicUrl {
   width: 100%;
   height: 370rpx;
 }
@@ -13,12 +13,12 @@
   margin: 0 20rpx;
   vertical-align: top;
 }
-.categorysContainer .categoryScroll .category image {
+.categorysContainer .categoryScroll .category .showPicUrl {
   width: 200rpx;
   height: 200rpx;
   background: #eee;
 }
-.categorysContainer .categoryScroll .category text {
+.categorysContainer .categoryScroll .category .name {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

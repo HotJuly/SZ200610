@@ -1,10 +1,10 @@
 <template>
 	<view class="categorysContainer">
-		<image :src="categorys.titlePicUrl" mode=""></image>
+		<image class="titlePicUrl" :src="categorys.titlePicUrl" mode=""></image>
 		<scroll-view scroll-x="true" class="categoryScroll">
 			<view class="category" v-for="category in categorys.itemList" :key="category.id">
-				<image :src="category.showPicUrl" mode=""></image>
-				<text>{{category.name}}</text>
+				<image class="showPicUrl" :src="category.showPicUrl" mode=""></image>
+				<text class="name">{{category.name}}</text>
 			</view>
 		</scroll-view>
 	</view>
@@ -18,7 +18,7 @@
 
 <style lang="stylus">
 	.categorysContainer
-		>image
+		>.titlePicUrl
 			width 100%
 			height 370upx
 		.categoryScroll
@@ -30,11 +30,11 @@
 				width 200upx
 				margin 0 20upx
 				vertical-align top
-				image
+				.showPicUrl
 					width 200upx
 					height 200upx
 					background #eee
-				text
+				.name
 					display -webkit-box
 					-webkit-line-clamp 2
 					-webkit-box-orient vertical
