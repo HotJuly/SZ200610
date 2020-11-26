@@ -10,13 +10,22 @@
 		</view>
 		
 		<scroll-view scroll-x="true" class="navScroll" v-if="indexDatas.kingKongModule">
-			<view class="scrollItem active">
+			<view class="scrollItem"
+			 :class="navIndex===-1?'active':''"
+			 @click="changeNavIndex(-1)"
+			 >
 				推荐
 			</view>
-			<view class="scrollItem" v-for="(item,index) in indexDatas.kingKongModule.kingKongList" :key="item.L1Id">
+			<view class="scrollItem"
+			 :class="navIndex===index?'active':''"
+			 v-for="(item,index) in indexDatas.kingKongModule.kingKongList"
+			 @click="changeNavIndex(index)"
+			 :key="item.L1Id"
+			  >
 				{{item.text}}
 			</view>
 		</scroll-view>
+		<Recommend :indexDatas="indexDatas"/>
 		
 	</view>
 	<!-- <div class="indexContainer">indexContainer</div> -->
@@ -25,10 +34,12 @@
 
 <script>
 	import ajax from '../../utils/ajax.js';
+	import Recommend from '../../components/Recommend/Recommend.vue';
 	export default {
 		data() {
 			return {
-				indexDatas:{}
+				indexDatas:{},
+				navIndex:3
 			}
 		},
 		/*
@@ -56,6 +67,14 @@
 		   let indexDatas = await ajax('/getIndexDatas');
 		   // console.log('indexDatas',indexDatas)
 		   this.indexDatas=indexDatas;
+	   },
+	   methods:{
+		   changeNavIndex(index){
+			   this.navIndex=index;
+		   }
+	   },
+	   components:{
+		   Recommend
 	   }
 	   
 	}

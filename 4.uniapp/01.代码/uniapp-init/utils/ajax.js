@@ -1,7 +1,10 @@
 import config from './config.js';
 let baseURL;
-console.log(uni.getSystemInfoSync())
+// console.log(uni.getSystemInfoSync())
+
+//获取当前运行环境信息
 let systemInfo= uni.getSystemInfoSync().platform;
+
 if(systemInfo==="devtools"){
 	//systemInfo值为devtools,说明当前运行环境是小程序
 	baseURL=config.mpHost

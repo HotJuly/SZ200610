@@ -8531,61 +8531,18 @@ function normalizeComponent (
 /* 18 */,
 /* 19 */,
 /* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */
-/*!****************************************************************************!*\
-  !*** C:/Users/CHH/Desktop/200610/4.uniapp/01.代码/uniapp-init/utils/ajax.js ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = _default;var _config = _interopRequireDefault(__webpack_require__(/*! ./config.js */ 29));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-var baseURL;
-console.log(uni.getSystemInfoSync());
-var systemInfo = uni.getSystemInfoSync().platform;
-if (systemInfo === "devtools") {
-  //systemInfo值为devtools,说明当前运行环境是小程序
-  baseURL = _config.default.mpHost;
-} else if ((systemInfo === "ios" || systemInfo === "android") && "development" === "development") {
-  //systemInfo值为ios或者android,说明当前运行环境是h5
-  baseURL = _config.default.h5Host;
-}
-
-function _default(url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "GET";
-  return new Promise(function (resolve, reject) {
-    uni.request({
-      url: baseURL + url,
-      data: data,
-      method: method,
-      success: function success(res) {
-        // console.log(res.data)
-        resolve(res.data);
-      },
-      fail: function fail() {
-
-      } });
-
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-/* 26 */
+/* 21 */
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 27);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
 
 
 /***/ }),
-/* 27 */
+/* 22 */
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -8616,7 +8573,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 28);
+module.exports = __webpack_require__(/*! ./runtime */ 23);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -8632,7 +8589,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 28 */
+/* 23 */
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -9363,7 +9320,49 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 29 */
+/* 24 */
+/*!****************************************************************************!*\
+  !*** C:/Users/CHH/Desktop/200610/4.uniapp/01.代码/uniapp-init/utils/ajax.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = _default;var _config = _interopRequireDefault(__webpack_require__(/*! ./config.js */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var baseURL;
+// console.log(uni.getSystemInfoSync())
+
+//获取当前运行环境信息
+var systemInfo = uni.getSystemInfoSync().platform;
+
+if (systemInfo === "devtools") {
+  //systemInfo值为devtools,说明当前运行环境是小程序
+  baseURL = _config.default.mpHost;
+} else if ((systemInfo === "ios" || systemInfo === "android") && "development" === "development") {
+  //systemInfo值为ios或者android,说明当前运行环境是h5
+  baseURL = _config.default.h5Host;
+}
+
+function _default(url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "GET";
+  return new Promise(function (resolve, reject) {
+    uni.request({
+      url: baseURL + url,
+      data: data,
+      method: method,
+      success: function success(res) {
+        // console.log(res.data)
+        resolve(res.data);
+      },
+      fail: function fail() {
+
+      } });
+
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 25 */
 /*!******************************************************************************!*\
   !*** C:/Users/CHH/Desktop/200610/4.uniapp/01.代码/uniapp-init/utils/config.js ***!
   \******************************************************************************/
