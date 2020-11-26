@@ -33,12 +33,13 @@
 </template>
 
 <script>
+	import {mapState} from 'vuex';
 	import ajax from '../../utils/ajax.js';
 	import Recommend from '../../components/Recommend/Recommend.vue';
 	export default {
 		data() {
 			return {
-				indexDatas:{},
+				// indexDatas:{},
 				navIndex:3
 			}
 		},
@@ -64,14 +65,30 @@
 		   console.log('onLoad')
 		   //想要得到promise的value值,要么async和await或者then方法
 		   // let indexDatas = await ajax('http://localhost:3000/getIndexDatas');
-		   let indexDatas = await ajax('/getIndexDatas');
+		   // let indexDatas = await ajax('/getIndexDatas');
 		   // console.log('indexDatas',indexDatas)
-		   this.indexDatas=indexDatas;
+		   // this.indexDatas=indexDatas;
+		   
+		   this.$store.dispatch('getIndexDatas');
+		   // console.log(this.$store.state)
+		   
+		   // this.$store.commit('set1');
+		   // this.$store.commit('set2');
 	   },
 	   methods:{
 		   changeNavIndex(index){
 			   this.navIndex=index;
 		   }
+	   },
+	   computed:{
+		   // indexDatas(){
+			  //  // console.log('store',this.$store)
+			  //  return this.$store.state.home.indexDatas
+		   // },
+		   // ...mapState(['indexDatas'])	没有模块化时候,可用
+		   ...mapState({
+			   indexDatas:state=>state.home.indexDatas
+		   })
 	   },
 	   components:{
 		   Recommend

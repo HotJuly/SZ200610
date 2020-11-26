@@ -166,12 +166,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _ajax = _interopRequireDefault(__webpack_require__(/*! ../../utils/ajax.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Recommend = function Recommend() {return __webpack_require__.e(/*! import() | components/Recommend/Recommend */ "components/Recommend/Recommend").then(__webpack_require__.bind(null, /*! ../../components/Recommend/Recommend.vue */ 30));};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 39);
+var _ajax = _interopRequireDefault(__webpack_require__(/*! ../../utils/ajax.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Recommend = function Recommend() {return __webpack_require__.e(/*! import() | components/Recommend/Recommend */ "components/Recommend/Recommend").then(__webpack_require__.bind(null, /*! ../../components/Recommend/Recommend.vue */ 30));};var _default =
 
 {
   data: function data() {
     return {
-      indexDatas: {},
+      // indexDatas:{},
       navIndex: 3 };
 
   },
@@ -193,18 +194,34 @@ var _ajax = _interopRequireDefault(__webpack_require__(/*! ../../utils/ajax.js *
   // mounted(){
   //  console.log('mounted')
   // },
-  onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var indexDatas;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+  onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
               console.log('onLoad');
               //想要得到promise的value值,要么async和await或者then方法
               // let indexDatas = await ajax('http://localhost:3000/getIndexDatas');
-              _context.next = 3;return (0, _ajax.default)('/getIndexDatas');case 3:indexDatas = _context.sent;
+              // let indexDatas = await ajax('/getIndexDatas');
               // console.log('indexDatas',indexDatas)
-              this.indexDatas = indexDatas;case 5:case "end":return _context.stop();}}}, _callee, this);}));function onLoad() {return _onLoad.apply(this, arguments);}return onLoad;}(),
+              // this.indexDatas=indexDatas;
 
+              this.$store.dispatch('getIndexDatas');
+              // console.log(this.$store.state)
+
+              // this.$store.commit('set1');
+              // this.$store.commit('set2');
+            case 2:case "end":return _context.stop();}}}, _callee, this);}));function onLoad() {return _onLoad.apply(this, arguments);}return onLoad;}(),
   methods: {
     changeNavIndex: function changeNavIndex(index) {
       this.navIndex = index;
     } },
+
+  computed: _objectSpread({},
+
+
+
+
+
+  (0, _vuex.mapState)({
+    indexDatas: function indexDatas(state) {return state.home.indexDatas;} })),
+
 
   components: {
     Recommend: Recommend } };exports.default = _default;

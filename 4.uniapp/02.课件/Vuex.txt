@@ -1,0 +1,43 @@
+1.对Vuex的理解
+ 他是一个Vue的js扩展库
+ 管理多组件共享的状态数据
+
+2.Vuex的核心概念
+store
+用处:用于管理state,mutation,action,getter,并向外暴露一些操作的API
+
+state
+用处:用于存储多组件共享状态
+
+mutation
+数据类型:函数
+用处:直接修改state中的数据,mutation内部必须写同步代码
+面试题一:为什么mutation必须是同步函数
+回答:
+	1.官方代码规范
+	2.Vue devTool 记录触发过的mutation,如果写入异步代码,会导致mutation的执行顺序和state的更新顺序不统一
+
+面试题二:mutation名称为什么推荐定义为常量
+回答:
+	防止多人协同开发时候,重复定义同名的mutation,后者覆盖先者,导致之前的旧代码无法正常运行,同时排错极难
+
+action
+数据类型:函数
+用处:间接修改state中的数据,触发mutation来实现更新state,一般我们会在内部写异步代码
+面试题:仅从技术方面来说,action能不能直接修改state
+回答:	可以做到
+
+面试题:为什么不用action直接修改state
+回答:
+	1.官方代码规范
+	2.Vue devTool 只能记录触发过的mutation,不记录触发的action
+
+getter
+数据类型:函数
+用处:相当于Vue组件中的computed(当前需要一个数据,但是手上没有,然而这个数据跟data或者props相关,最终可以通过他们计算出来)
+
+dispatch
+用处:用于分发(触发)action
+
+commit
+用处:用于触发mutation
