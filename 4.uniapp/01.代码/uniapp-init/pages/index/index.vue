@@ -25,7 +25,11 @@
 				{{item.text}}
 			</view>
 		</scroll-view>
-		<Recommend :indexDatas="indexDatas"/>
+		
+		
+		<scroll-view class="contentScroll" scroll-y="true" >
+			<Recommend :indexDatas="indexDatas"/>
+		</scroll-view>
 		
 	</view>
 	<!-- <div class="indexContainer">indexContainer</div> -->
@@ -155,4 +159,10 @@
 					height 2upx
 					width 100%
 					background-color red
+		.contentScroll
+			// 小程序的height = 屏幕100%高度 - 头部高度 - 导航条高度
+			// height calc( 100vh - 80upx - 80upx )
+			//	h5页面中,导航栏和tabBar都会占据一定高度
+			// h5页面height = 屏幕100%高度 - 头部高度 - 导航条高度 - 导航栏高度 - tabBar高度
+			height calc( 100vh - 80upx - 80upx - var(--window-bottom) - var(--window-top) )
 </style>

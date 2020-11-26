@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root{
+            --main-color:blue;
+        }
+        #box1{
+            width:200px;
+            height: 200px;
+            border: 1px solid;
+            color:var(--main-color);
+        }
+        #box2{
+            width:200px;
+            height: 200px;
+            border: 1px solid;
+            background-color:var(--main-color);
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1">
+        这是box1
+    </div>
+    <div id="box2">
+        这是box2
+    </div>
+    <button id="btn">修改主题色</button>
+    <script>
+        btn.onclick=function(){
+            document.documentElement.style.setProperty('--main-color','green');
+        }
+    </script>
+</body>
+</html>
