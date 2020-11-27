@@ -1,6 +1,10 @@
 const Koa = require('koa');
 const KoaRouter = require('koa-router');
 
+const Fly = require('flyio/src/node/index.js');
+
+const fly = new Fly();
+
 /*
     1.创建服务器应用实例
         express()
@@ -65,6 +69,27 @@ router.get('/getGoodDetail',function(ctx,next){
 	})||[];
     console.log('/getGoodDetail get success')
     ctx.body=good
+})
+
+
+//用于返回用户自定义登录态TOKEN(由OpenId生成)
+router.get('/getOpenId',async function(ctx,next){
+	// console.log(ctx.query)
+	//code是通过wx.login得到的用户临时凭证
+	let {code} =ctx.query;
+	
+	let appid = 'wxe5931a68ea66cece';
+	
+	let appsecret = '50826ecfcb557365399d9671aba13abb';
+	
+	let url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${appsecret}&js_code=${code}&grant_type=authorization_code`;
+	// console.log(code)
+	
+	let result = await fly.get(url);
+	let {session_key,openid} = JSON.parse(result.data);
+	// console.log(data)
+	
+    ctx.body=openid
 })
 
 /*
