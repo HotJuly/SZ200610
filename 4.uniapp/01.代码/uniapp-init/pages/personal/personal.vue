@@ -94,7 +94,6 @@
 			}
 		},
 		onLoad(){
-			console.log(uni.getStorageSync('userInfo'))
 			// uni.getUserInfo实现二次登陆免授权
 			let userInfo = uni.getStorageSync('userInfo');
 			if(userInfo){

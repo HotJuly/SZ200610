@@ -28,7 +28,8 @@
 		
 		
 		<scroll-view class="contentScroll" scroll-y="true" >
-			<Recommend :indexDatas="indexDatas"/>
+			<Recommend :indexDatas="indexDatas" v-if="navIndex===-1"/>
+			<CateList :navIndex="navIndex" v-else/>
 		</scroll-view>
 		
 	</view>
@@ -40,11 +41,12 @@
 	import {mapState} from 'vuex';
 	import ajax from '../../utils/ajax.js';
 	import Recommend from '../../components/Recommend/Recommend.vue';
+	import CateList from '../../components/cateList/cateList.vue';
 	export default {
 		data() {
 			return {
 				// indexDatas:{},
-				navIndex:3
+				navIndex:-1
 			}
 		},
 		/*
@@ -95,7 +97,8 @@
 		   })
 	   },
 	   components:{
-		   Recommend
+		   Recommend,
+		   CateList
 	   }
 	   
 	}
