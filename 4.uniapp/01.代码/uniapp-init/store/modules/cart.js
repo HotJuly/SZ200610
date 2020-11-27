@@ -7,6 +7,7 @@ import ajax from '../../utils/ajax.js';
 const state ={
 	cartList:[
 		{
+			"selected":false,
 			"count":2,
 		    "promId": 0,
 		    "showPoints": false,
@@ -83,6 +84,7 @@ const state ={
 		    "itemSizeTableFlag": false
 		},
 		{
+			"selected":true,
 			"count":5,
 		    "promId": 0,
 		    "showPoints": false,
@@ -178,10 +180,48 @@ const mutations ={
 		   shopItem.count+=1;
 	   }else{
 			// good.count=1;
+			// let arr=[];
+			// arr[0]={}
+			// arr.0={}
+			// arr.push('')
 			Vue.set(good,'count',1);
 			state.cartList.push(good)
 	   }
 	   console.log(shopItem,good)
+	},
+	changeCountMutation(state,{type,index}){
+		// console.log(state,type,index)
+		let shopItem = state.cartList[index];
+		if(type){
+			shopItem.count++;
+		}else{
+			if(shopItem.count<=1){
+				//如果商品数量小于等于1,当前就应该删除该商品
+				state.cartList.splice(index,1);
+			}else{
+				//如果商品数量大于1,就将商品数量-1即可
+				shopItem.count--;
+			}
+		}
+	},
+	changeSelectedMutation(state,{selected,index}){
+		// console.log(state,selected,index)
+		let shopItem = state.cartList[index];
+		shopItem.selected = selected;
+	},
+	changeSelectedAllMutation(state,selected){
+		/*
+			将购物车中所有的商品的选中状态都改成与当前全选按钮状态相反
+			1.与当前全选按钮状态相反
+				传参时,将选中状态取反
+			2.将购物车中所有的商品的选中状态进行修改
+				首先,需不需要返回值->forEach->forEch本身不存在返回值
+		*/
+	   let a= state.cartList.forEach((shopItem)=>{
+		   shopItem.selected=selected
+		   // return 123
+	   })
+	   // console.log(a)
 	}
 }
 
@@ -190,7 +230,30 @@ const actions ={
 }
 
 const getters ={
-	
+	isSelectedAll(state){
+		/*
+			1.返回值数据类型:Boolean
+			2.当购物车中所有商品都被选中,返回true
+				every->所有的数据都符合条件,返回true,否则返回false
+				和
+				some->只要有一个数据符合条件,返回true,否则返回false
+					找到一个未选中的
+			3.当购物车中有一个以上的商品未被选中,返回false
+			4.当购物车中没有商品,返回false
+		
+		*/
+	   //只要有一个商品是未选中状态,就返回true
+	   let result = state.cartList.some((shopItem)=>{
+		   return shopItem.selected === false;
+	   })
+	   
+	   //只要有一个商品是未选中状态,就返回false
+	   // let result = state.cartList.every((shopItem)=>{
+		  //  return shopItem.selected === true;
+	   // })
+	   
+		return state.cartList.length&&!result;
+	}
 }
 
 export default{

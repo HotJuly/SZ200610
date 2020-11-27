@@ -18,28 +18,42 @@
 		
 		<!-- 登陆之后的购物车 -->
 		<block v-else>
-			<view class="cartList">
-				<view class="cartItem" v-for="shopItem in cartList" :key="shopItem.id">
-					<text class='iconfont icon-xuanzhong selected'></text>
-					<view class="shopItem">
-						<image class="shopImg" :src="shopItem.listPicUrl" mode=""></image>
-						<view class="shopInfo">
-							<text>{{shopItem.name}}</text>
-							<text class="price">￥{{shopItem.retailPrice}}</text>
+			<block v-if="cartList.length">
+				<view class="cartList">
+					<view class="cartItem" v-for="(shopItem,index) in cartList" :key="shopItem.id">
+						<text class='iconfont icon-xuanzhong '
+						 :class="shopItem.selected?'selected':''"
+						 @click="changSelected(!shopItem.selected,index)"
+						 ></text>
+						<view class="shopItem">
+							<image class="shopImg" :src="shopItem.listPicUrl" mode=""></image>
+							<view class="shopInfo">
+								<text>{{shopItem.name}}</text>
+								<text class="price">￥{{shopItem.retailPrice}}</text>
+							</view>
+						</view>
+						<!-- 控制数量 -->
+						<view class="countCtrl">
+							<text class="add" @click="changeCount(true,index)"> + </text>
+							<text class="count"> {{shopItem.count}} </text>
+							<text class="del" @click="changeCount(false,index)"> - </text>
 						</view>
 					</view>
-					<!-- 控制数量 -->
-					<view class="countCtrl">
-						<text class="add"> + </text>
-						<text class="count"> {{shopItem.count}} </text>
-						<text class="del"> - </text>
-					</view>
+					
 				</view>
-				
-			</view>
+			</block>
+			
+			<block v-else>
+				<image class="cartImg" src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noCart-d6193bd6e4.png?imageView&type=webp" mode=""></image>
+				<view class="hint">购物车还是空的，赶紧去购物吧</view>
+			</block>
+
 			<!-- 底部下单 -->
 			<view class="cartFooter">
-				<text class='iconfont icon-xuanzhong selected'></text>
+				<text class='iconfont icon-xuanzhong'
+				 :class="isSelectedAll?'selected':''"
+				 @click="changeSelectedAll(!isSelectedAll)"
+				 ></text>
 				<text class="allSelected">已选 3</text>
 				<view class="right">
 					<text class="totalPrice">合计: ￥1000</text>
@@ -52,7 +66,7 @@
 </template>
 
 <script>
-	import {mapState} from 'vuex'
+	import {mapState,mapMutations,mapGetters} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -69,13 +83,30 @@
 		computed:{
 			...mapState({
 				cartList:state=>state.cart.cartList
-			})
+			}),
+			...mapGetters(["isSelectedAll"])
 		},
 		methods:{
+			...mapMutations(["changeCountMutation","changeSelectedMutation","changeSelectedAllMutation"]),
 			toLogin(){
 				uni.navigateTo({
 					url:"/pages/login/login"
 				})
+			},
+			changeCount(type,index){
+				// console.log(type,index)
+				this.changeCountMutation({type,index})
+				// if(type){
+				// 	//说明增加商品
+				// }else{
+				// 	//减少商品数量
+				// }
+			},
+			changSelected(selected,index){
+				this.changeSelectedMutation({selected,index});
+			},
+			changeSelectedAll(selected){
+				this.changeSelectedAllMutation(selected);
 			}
 		}
 	}
