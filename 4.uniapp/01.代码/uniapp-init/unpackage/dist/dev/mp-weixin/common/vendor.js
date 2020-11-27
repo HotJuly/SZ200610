@@ -9427,6 +9427,9 @@ function _default(url) {var data = arguments.length > 1 && arguments[1] !== unde
       url: baseURL + url,
       data: data,
       method: method,
+      header: {
+        token: uni.getStorageSync('token') },
+
       success: function success(res) {
         // console.log(res.data)
         resolve(res.data);

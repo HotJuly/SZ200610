@@ -2,6 +2,7 @@ const Koa = require('koa');
 const KoaRouter = require('koa-router');
 
 const Fly = require('flyio/src/node/index.js');
+const jwt = require('jsonwebtoken');
 
 const fly = new Fly();
 
@@ -89,7 +90,39 @@ router.get('/getOpenId',async function(ctx,next){
 	let {session_key,openid} = JSON.parse(result.data);
 	// console.log(data)
 	
-    ctx.body=openid
+	
+	/*
+		jwt->jsonwebtoken
+		加密数据:sign函数返回值是token
+			jwt.sign(需要加密的数据,盐,[options])->盐->提高强行破解的难度
+			需要加密的数据->{data:数据}
+			设置过期时长:
+				options->expiresIn(单位:s)
+		
+		解密数据:verify函数返回值是加密前的数据
+			jwt.verify(需要解密的token,盐)
+			判断是否过期:
+				
+	*/
+	let salt = 'atguigu';
+	let token = jwt.sign({
+		data:openid
+	},salt,{
+		expiresIn:5
+	});
+	// console.log(openid,token)
+	jwt.verify(token,salt,function(err,data){
+		console.log(err,data)
+		console.log(new Date(data.iat*1000),new Date(data.exp*1000))
+	});
+	setTimeout(()=>{
+		jwt.verify(token,salt,function(err,data){
+			console.log(err.expiredAt,data)
+			// console.log(new Date(data.iat*1000),new Date(data.exp*1000))
+		});
+	},6000);
+	// console.log(openid,newOpenId)
+    ctx.body=token
 })
 
 /*
