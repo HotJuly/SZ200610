@@ -10417,7 +10417,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/cart/cart": {}, "pages/index/index": { "navigationBarTitleText": "首页" }, "pages/category/category": {}, "pages/personal/personal": {}, "pages/login/login": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "硅谷商城", "navigationBarBackgroundColor": "#FF0000", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/cart/cart": { "usingComponents": {} }, "pages/index/index": { "navigationBarTitleText": "首页", "usingComponents": { "recommend": "/components/Recommend/Recommend", "cate-list": "/components/cateList/cateList" } }, "pages/category/category": { "usingComponents": {} }, "pages/personal/personal": { "usingComponents": {} }, "pages/login/login": { "usingComponents": {} }, "pages/detail/detail": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "硅谷商城", "navigationBarBackgroundColor": "#FF0000", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 
@@ -10603,8 +10603,25 @@ var state = {
 
 
 
-var mutations = {};
-
+var mutations = {
+  addShopItem: function addShopItem(state, good) {
+    /*
+                                                  	情况1:如果该商品在购物车中不存在,应该将该商品添加到购物车中
+                                                  	情况2:如果该商品在购物车中存在,应该将购物车中的该商品数量+1
+                                                  */
+    console.log('addShopItem');
+    // good.count
+    //查看是否已存在
+    var shopItem = state.cartList.find(function (shopItem) {
+      return shopItem.id === good.id;
+    });
+    if (shopItem) {
+      shopItem.count += 1;
+    } else {
+      good.count = 1;
+      state.cartList.push(good);
+    }
+  } };
 
 
 var actions = {};

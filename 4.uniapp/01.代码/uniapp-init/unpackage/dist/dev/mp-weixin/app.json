@@ -4,7 +4,8 @@
     "pages/index/index",
     "pages/category/category",
     "pages/personal/personal",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/detail/detail"
   ],
   "subPackages": [],
   "window": {
@@ -43,6 +44,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap64.json"
+  "usingComponents": {}
 }

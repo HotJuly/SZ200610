@@ -22,6 +22,10 @@
             "path" : "pages/login/login",
             "style" : {}
         }
+        ,{
+            "path" : "pages/detail/detail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

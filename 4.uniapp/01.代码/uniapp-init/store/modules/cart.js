@@ -161,7 +161,24 @@ const state ={
 }
 
 const mutations ={
-	
+	addShopItem(state,good){
+		/*
+			情况1:如果该商品在购物车中不存在,应该将该商品添加到购物车中
+			情况2:如果该商品在购物车中存在,应该将购物车中的该商品数量+1
+		*/
+	   console.log('addShopItem')
+	   // good.count
+	   //查看是否已存在
+	   let shopItem = state.cartList.find((shopItem)=>{
+		   return shopItem.id === good.id
+	   })
+	   if(shopItem){
+		   shopItem.count+=1;
+	   }else{
+			good.count=1;
+			state.cartList.push(good)
+	   }
+	}
 }
 
 const actions ={
