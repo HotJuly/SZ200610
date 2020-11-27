@@ -10441,7 +10441,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _ajax = _interopRequireDefault(__webpack_require__(/*! ../../utils/ajax.js */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _ajax = _interopRequireDefault(__webpack_require__(/*! ../../utils/ajax.js */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // import {
 // 	SETINDEXDATAS
 // } from '../mutation-types.js'
@@ -10615,12 +10616,15 @@ var mutations = {
     var shopItem = state.cartList.find(function (shopItem) {
       return shopItem.id === good.id;
     });
+    // console.log()
     if (shopItem) {
       shopItem.count += 1;
     } else {
-      good.count = 1;
+      // good.count=1;
+      _vue.default.set(good, 'count', 1);
       state.cartList.push(good);
     }
+    console.log(shopItem, good);
   } };
 
 

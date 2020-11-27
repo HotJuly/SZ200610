@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import ajax from '../../utils/ajax.js';
 // import {
 // 	SETINDEXDATAS
@@ -172,12 +173,15 @@ const mutations ={
 	   let shopItem = state.cartList.find((shopItem)=>{
 		   return shopItem.id === good.id
 	   })
+	   // console.log()
 	   if(shopItem){
 		   shopItem.count+=1;
 	   }else{
-			good.count=1;
+			// good.count=1;
+			Vue.set(good,'count',1);
 			state.cartList.push(good)
 	   }
+	   console.log(shopItem,good)
 	}
 }
 
