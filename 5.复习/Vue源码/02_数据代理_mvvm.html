@@ -14,15 +14,22 @@
   3). 在get/set方法中去操作data中对应的属性
 -->
 
+
+
+    <!-- id 属性节点 -->
     <div id="app">
-      <p>{{msg}}</p>
+      <!-- ""  文本节点 -->
+      <p id="ppp">{{msg}}</p>
+      <span id="sss" v-text="msg"></span>
+      <!-- p  元素节点 -->
+      <!-- "" 文本节点 -->
     </div>
     <script src="./js/observer.js"></script>
     <script src="./js/watcher.js"></script>
     <script src="./js/compile.js"></script>
     <script src="./js/mvvm.js"></script>
     <script>
-      debugger
+      // debugger
 
       /*
         vm._data = options.data 代表原属性
@@ -44,6 +51,9 @@
         el: "#app",
         data: {
           msg: "hello MVVM",
+          a:{
+            c:123
+          }
         },
       });
 

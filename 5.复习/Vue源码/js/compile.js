@@ -1,10 +1,15 @@
 function Compile(el, vm) {
+  //"#app", vm
   // 将vm添加this上，目的为了将来其他函数也能获取vm
+  //this->Compile的实例对象compile
   this.$vm = vm;
   // 判断el是否是元素，如果是元素就返回这个元素，不是就获取元素然后返回
+  // this.$el = this.isElementNode(el) ? el : document.querySelector('#app');
+  //this.$el内部存放的是真实DOM
   this.$el = this.isElementNode(el) ? el : document.querySelector(el);
 
   // 如果元素存在，开始模板解析
+  //必须要有真实DOM才能进入该判断
   if (this.$el) {
     // 1. 将元素节点转换成文档碎片节点
     this.$fragment = this.node2Fragment(this.$el);
@@ -18,11 +23,13 @@ function Compile(el, vm) {
 Compile.prototype = {
   constructor: Compile,
   node2Fragment: function (el) {
-    var fragment = document.createDocumentFragment(),
-      child;
+    //创建文档碎片
+    var fragment = document.createDocumentFragment(),child;
 
     // 将原生节点拷贝到fragment
+    //while内部的判断如果为true会继续执行内部代码
     while ((child = el.firstChild)) {
+      //将el.firstChild插入到文档碎片中,会导致html中的该节点会消失
       fragment.appendChild(child);
     }
 
@@ -35,15 +42,19 @@ Compile.prototype = {
   },
 
   compileElement: function (el) {
+    //el->this.$fragment->文档碎片
     // 获取当前元素所有子节点
-    var childNodes = el.childNodes,
-      me = this;
+    var childNodes = el.childNodes,me = this;
 
     // 将所有子节点转换成真数组进行遍历
+    //slice可以进行数组的浅克隆,也可以将伪数组转成真数组
+    //childNodes=>[<p>{{msg}}</p>]
     [].slice.call(childNodes).forEach(function (node) {
       // 提取当前节点的文本内容
+      //text=>{{msg}}
       var text = node.textContent;
       // 定义一个用来匹配插值语法正则表达式
+      // reg=>{{.......}}
       var reg = /\{\{(.*)\}\}/;
 
       // 判断当前节点是否是元素节点
@@ -66,10 +77,11 @@ Compile.prototype = {
   },
 
   compile: function (node) {
+    //node=><p>{{msg}}</p>
     // 获取节点所有属性对象成一个数组  ['v-on:click']
-    var nodeAttrs = node.attributes,
-      me = this;
-
+    var nodeAttrs = node.attributes,me = this;
+    // node.attributes=>保存所有的属性节点
+    console.log(node.attributes);
     /*
       v-on:click
         v- 用来判断是否是指令
@@ -79,8 +91,10 @@ Compile.prototype = {
     */
     // 遍历
     [].slice.call(nodeAttrs).forEach(function (attr) {
+      //  attr->属性节点对象
       // attr 就是单个属性对象
       // attrName 属性名 v-on:click
+      //var attrName = attr.name; =>  "id"
       var attrName = attr.name;
       // 判断当前属性是否是指令属性，如果是就要解析，如果不是就啥也不管
       if (me.isDirective(attrName)) {
@@ -118,6 +132,7 @@ Compile.prototype = {
   },
 
   isElementNode: function (node) {
+    // return '#app'.nodeType->undefined;
     return node.nodeType == 1;
   },
 
