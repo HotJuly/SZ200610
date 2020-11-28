@@ -1,6 +1,5 @@
 function Compile(el, vm) {
   // 将vm添加this上，目的为了将来其他函数也能获取vm
-  //this->compile实例对象
   this.$vm = vm;
   // 判断el是否是元素，如果是元素就返回这个元素，不是就获取元素然后返回
   this.$el = this.isElementNode(el) ? el : document.querySelector(el);
@@ -43,7 +42,7 @@ Compile.prototype = {
     // 将所有子节点转换成真数组进行遍历
     [].slice.call(childNodes).forEach(function (node) {
       // 提取当前节点的文本内容
-      var text = node.textContent;//node.innerText  p.textContent="{{ person.name }}"
+      var text = node.textContent;
       // 定义一个用来匹配插值语法正则表达式
       var reg = /\{\{(.*)\}\}/;
 
@@ -68,7 +67,6 @@ Compile.prototype = {
 
   compile: function (node) {
     // 获取节点所有属性对象成一个数组  ['v-on:click']
-    console.log('nodeAttrs',node.attributes)
     var nodeAttrs = node.attributes,
       me = this;
 
@@ -87,13 +85,12 @@ Compile.prototype = {
       // 判断当前属性是否是指令属性，如果是就要解析，如果不是就啥也不管
       if (me.isDirective(attrName)) {
         // 获取属性值 --> 指令表达式 handleClick
-        var exp = attr.value;//"handle"
+        var exp = attr.value;
         // 截取2位得到 on:click
         var dir = attrName.substring(2);
         // 判断是否是事件指令 v-on
         if (me.isEventDirective(dir)) {
           // 事件处理
-          // compileUtil.eventHandler(p标签, vm, "handle", "on:click");
           compileUtil.eventHandler(node, me.$vm, exp, dir);
           // 普通指令 v-text v-html v-class v-model
         } else {
@@ -166,7 +163,6 @@ var compileUtil = {
   // exp 表达式
   // dir text
   bind: function (node, vm, exp, dir) {
-    // node->p标签, vm->vm, exp->undefined, dir->"text"
     // 取出更新函数 textUpdater
     var updaterFn = updater[dir + "Updater"];
 
@@ -176,8 +172,6 @@ var compileUtil = {
 
     // 所有指令（除了事件指令）和插值语法都有watcher
     // 第三个参数是cb，更新用户界面方法
-    //每个指令或者插值表达式都会生成一个watcher实例
-    // new Watcher(vm, "msg", function(){})
     new Watcher(vm, exp, function (value, oldValue) {
       updaterFn && updaterFn(node, value, oldValue);
     });
@@ -213,7 +207,6 @@ var compileUtil = {
     // val --> vm
     var val = vm;
     // exp --> person.name
-    // exp --> msg
     // ['person', 'name']
     exp = exp.split(".");
     exp.forEach(function (k) {
@@ -223,7 +216,6 @@ var compileUtil = {
                 第二次： k --> name
                     val[k] --> person['name'] --> val赋值jack
             */
-      // val=vm["msg"]->this.msg
       val = val[k];
     });
     return val;

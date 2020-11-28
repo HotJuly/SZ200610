@@ -7,7 +7,6 @@ function Observer(data) {
 Observer.prototype = {
     constructor: Observer,
     walk: function(data) {
-        //this->observer实例对象
         var me = this;
         // 遍历data数据
         Object.keys(data).forEach(function(key) {
@@ -15,8 +14,6 @@ Observer.prototype = {
         });
     },
     convert: function(key, val) {
-        //this.defineReactive(this.data, "msg", "hello MVVM");
-        //this.defineReactive(this.data, "person", {name: "jack"});
         this.defineReactive(this.data, key, val);
     },
 
@@ -24,7 +21,6 @@ Observer.prototype = {
     defineReactive: function(data, key, val) {
         // 每一个响应式属性（data中的数据）
         // 都通过闭包的方式保存了一个dep
-        //每个属性对应一个dep实例对象
         var dep = new Dep();
         // 递归遍历
         // 如果当前val是一个对象数据，也要变成响应式
@@ -56,32 +52,6 @@ Observer.prototype = {
                 dep.notify();
             }
         });
-        // 数据代理->data所有的属性解构到vm身上
-        // 数据劫持->将vm._data中所有的属性都重新定义,绑定get和set方法
-        // Object.defineProperty(_data, "msg", {
-        //     enumerable: true, // 可枚举
-        //     configurable: false, // 不能再define
-        //     get: function() {
-        //         if (Dep.target) {
-        //             // 建立dep和watcher的关系
-        //             dep.depend();
-        //         }
-        //         return val;
-        //     },
-        //     set: function(newVal) {
-        //         if (newVal === val) {
-        //             return;
-        //         }
-        //         // 更新data数据
-        //         val = newVal;
-        //         // 新的值是object的话，进行监听
-        //         // 新的数据劫持
-        //         childObj = observe(newVal);
-        //         // 通知订阅者
-        //         // 通知数据的dep对应所有的watcher，调用cb来更新用户界面
-        //         dep.notify();
-        //     }
-        // });
     }
 };
 

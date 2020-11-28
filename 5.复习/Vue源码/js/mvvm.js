@@ -8,13 +8,11 @@ function MVVM(options) {
   // 给实例对象vm添加_data（原数据），值就是配置对象中data数据
   // 定义变量data，值就是配置对象中data数据
   var data = this._data = this.$options.data;
-  // var data = (this._data = this.$options.data);
   // 缓存this，为了后面函数可以使用
   var me = this;
 
   // 数据代理：将data中数据代理到this上
   // 遍历data数据提取所有key，对其数据代理
-  //经过这一步之后,this.msg就可以使用,将_data中的数据代理到this身上
   Object.keys(data).forEach(function (key) {
     // 数据代理的方法
     me._proxyData(key);
@@ -50,7 +48,6 @@ MVVM.prototype = {
         get: function proxyGetter() {
           // 代理属性的读方法
           // 实际上返回是原数据的值
-          // return vm._data.msg
           return me._data[key];
         },
         set: function proxySetter(newVal) {
@@ -59,20 +56,6 @@ MVVM.prototype = {
           me._data[key] = newVal;
         },
       });
-      // Object.defineProperty(vm, "msg", {
-      //   configurable: false, // 不能重新配置和删除 
-      //   enumerable: true, // 可以被枚举
-      //   get: function proxyGetter() {
-      //     // 代理属性的读方法
-      //     // 实际上返回是原数据的值
-      //     return vm._data["msg"];
-      //   },
-      //   set: function proxySetter(newVal) {
-      //     // 代理属性的写方法
-      //     // 实际上更新原数据的值
-      //     vm._data["msg"] = newVal;
-      //   },
-      // })
   },
 
   _initComputed: function () {
