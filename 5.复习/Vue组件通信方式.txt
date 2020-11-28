@@ -1,0 +1,9 @@
+1.props
+2.prototype+Vue.observable
+3.自定义事件(v-model,事件总线,.sync)
+4.provider+inject
+5.$parent/$root/$children/$refs
+6.$attrs->收集当前组件没声明的标签属性
+   $listeners->收集当前组件标签上所有的自定义事件
+7.插槽->v-slot指令和slot组件
+8.Vuex

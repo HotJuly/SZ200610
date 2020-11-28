@@ -49,12 +49,18 @@ Vue.config.productionTip = false
   })
  
  */
+/*
+Vue.prototype.$abc=new Vue({})
+
+$abc.$on()
+$abc.$emit()
+*/
 
 Vue.prototype.state=Vue.observable( {
   count:0
 } )
 
-new Vue({
+let a = new Vue({
   // el:"#app"
   render: h => h(App),
 }).$mount('#app')
