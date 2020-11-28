@@ -3,6 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
+  <!-- "<div id='app'>......</div>" -->
 </template>
 
 <script>
@@ -12,17 +13,14 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  _my_option:3,
+  mounted(){
+    // console.log('App',this.$options._my_option)
+    console.log(c)
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
