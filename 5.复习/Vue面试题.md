@@ -23,6 +23,9 @@ https://juejin.im/post/6844904079206924295
         react->定义class或者function    
         vue->模版语法->通过RunTime+Complier把template编译成render方法
     diff算法不同
+        react->1.tree diff
+            ->2.component diff
+            ->3.element diff 
     更新数据方法:react->this.setState({msg:123})  vue->this.msg=123
         react数据持久化->this.state.msg=123不生效可以看出
         vue不是持久化
@@ -39,11 +42,12 @@ https://juejin.im/post/6844904079206924295
 
 
 - 谈谈 vue 生命周期
-    总共11个,常用8个,还有两个属于keep-alive,还有一个错误捕获capture
+    总共11个,常用8个,还有两个属于keep-alive,还有一个错误捕获errorCaptured
     分为三个阶段:初始阶段,更新阶段,卸载阶段
     初始阶段
         - beforeCreate
         - created
+            发送请求
         - beforeMount
         - mounted
             发送请求
@@ -55,7 +59,7 @@ https://juejin.im/post/6844904079206924295
     卸载阶段
         - beforeDestory
             停止定时器
-            如果是使用vue内置命令绑定的事件,vue会自动解绑
+            如果是使用vue内置命令绑定的事件,vue会自动解绑 @click=""
             如果是使用原生DOM绑定的监听(onclick,addEventListener),需要我们自己手动解绑
         - destoryed
 
@@ -112,7 +116,7 @@ state,actions,mutations
     路由跳转:
         1)声明式导航
             通过标签跳转
-            <router-link></router-link>
+            <router-link></router-link> ->event.preventDefault()->click事件
         2)编程式导航
             通过js的API控制跳转
             push() replace() go(Number)
