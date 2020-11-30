@@ -1,19 +1,21 @@
 <template>
   <div class="hello">
-    <h1 @click="changeMsg" v-once>{{ msg }}</h1>
-    <h2>{{state.count}}</h2>
-    <h3 @click="$emit('update:name','xixixix')">{{name}}</h3>
+    <!-- <h1 @click="changeMsg" v-once>{{ msg }}</h1>
+    <h2 ref="h2">{{state.count}}</h2>
+    <h3 @click="$emit('update:name','xixixix')">{{name}}</h3> -->
     <!-- <keep-alive exclude="B">
       <component  v-if="currentComponent==='A'" :is="currentComponent" />
     </keep-alive> -->
     <!-- <A {...$attrs}/> -->
-    <slot name="header" :a="a" :c="c"></slot>
-    <slot name="default"></slot>
+    <!-- <slot name="header" :a="a" :c="c"></slot>
+    <slot name="default"></slot> -->
+    <Input/>
   </div>
 </template>
 
 <script>
 import A from './A.vue'
+import Input from './input1.vue'
 export default {
   name: 'HelloWorld',
   data(){
@@ -49,7 +51,8 @@ export default {
   },
   mounted(){
     // console.log('HelloWorld',this.$options._my_option)
-    console.log(this.str)
+    console.dir(this.$refs.h2)
+    console.log(this)
     /*
     vm.$watch(
       function(){
@@ -62,7 +65,8 @@ export default {
     */
   },
   components:{
-    A
+    A,
+    Input
   }
 }
 </script>

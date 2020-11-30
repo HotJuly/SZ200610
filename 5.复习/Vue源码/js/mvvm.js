@@ -3,6 +3,7 @@
  * @param {*} options 配置对象
  */
 function MVVM(options) {
+  //beforeCreate()
   // let this = {};
   // 给实例对象vm添加$options，值是配置对象
   this.$options = options || {};
@@ -31,10 +32,13 @@ function MVVM(options) {
 
   // 数据劫持（数据绑定）：将data数据（_data, 原数据）重新定义，定义成响应式
   observe(data, this);
+  // created()
   // 模板解析：
   // 1. 将插值语法/指令语法解析
   // 2. new Watcher建立dep和watcher建立联系，才能变成响应式
+  // vm.$compile = new Compile("#app" || document.body, vm);
   this.$compile = new Compile(options.el || document.body, this);
+  //mounted()
 }
 
 // 构造函数的原型对象

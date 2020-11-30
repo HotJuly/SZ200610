@@ -56,10 +56,13 @@
           }
         },
       });
+      vm.msg="hello Vue"
+      //vm.msg="hello Vue" =>(数据代理) vm._data.msg="hello Vue"
+      //vm._data.msg="hello Vue"  =>(数据劫持)  vm._data.msg(setter)="hello Vue"
 
-      console.log(vm.msg);
+      // console.log(vm.msg);
 
-      console.log(vm._data.msg);
+      // console.log(vm._data.msg);
     </script>
   </body>
 </html>

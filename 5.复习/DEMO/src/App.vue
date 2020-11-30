@@ -47,20 +47,46 @@ export default {
     str:"123abc"
   },
   _my_option:3,
-  mounted(){
-    // console.log(this.msg)
-    // console.log('App',this.$options._my_option)
-    // console.log(c)
-    // this.$children[0].value="helloworld111"
-    console.log(this.$refs)
-    setTimeout(()=>{
-      this.currentComponent="B"
-    },3000)
-  },
+  // mounted(){
+  //   // console.log(this.msg)
+  //   // console.log('App',this.$options._my_option)
+  //   // console.log(c)
+  //   // this.$children[0].value="helloworld111"
+  //   console.log(this.$refs)
+  //   setTimeout(()=>{
+  //     this.currentComponent="B"
+  //   },3000)
+  // },
   methods:{
     handleInput(){
       console.log('input success')
     }
+  },
+  beforeCreate(){
+    /*
+      beforeCreate之前,1.注册事件,2.注册生命周期函数
+    */
+    console.log('vm',this,'$data',this.$data,'msg',this.msg)
+    console.log('refs',this.$refs)
+    console.log('----------- beforeCreate -----------')
+  },
+  created(){
+    /*
+      beforeCreate之后created之前,1.注入option,2.进行数据代理,数据劫持
+    */
+    console.log('vm',this,'$data',this.$data,'msg',this.msg)
+    console.log('refs',this.$refs)
+    console.log('----------- created -----------')
+  },
+  beforeMount(){
+    console.log('vm',this,'$data',this.$data,'msg',this.msg)
+    console.log('refs',this.$refs)
+    console.log('----------- beforeMount -----------')
+  },
+  mounted(){
+    console.log('vm',this,'$data',this.$data,'msg',this.msg)
+    console.log('refs',this.$refs)
+    console.log('----------- mounted -----------')
   }
 }
 </script>

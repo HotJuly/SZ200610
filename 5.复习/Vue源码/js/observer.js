@@ -74,7 +74,9 @@ Observer.prototype = {
         //         return val;
         //     },
         //     set: function(newVal) {
+        //          //第一次修改 newVal =>"hello Vue"
         //          Vue中,data的旧值和新值如果想用,不会触发视图更新
+        //          //newVal =>"hello Vue"  val=>"hello MVVM"
         //         if (newVal === val) {
         //             return;
         //         }
@@ -113,6 +115,7 @@ function Dep() {
 
 Dep.prototype = {
     addSub: function(sub) {
+        // dep.addSub(watcher);
         this.subs.push(sub);
     },
 
@@ -132,7 +135,7 @@ Dep.prototype = {
     notify: function() {
         // 遍历watcher
         this.subs.forEach(function(sub) {
-            // 调用watcher.update
+            // 调用watcher.update()->watcher.run()
             sub.update();
         });
     }

@@ -1,4 +1,7 @@
 function Watcher(vm, expOrFn, cb) {
+  // new Watcher(vm,'msg', function (value, oldValue) {
+    //   updater["textUpdater"] && updater["textUpdater"](span标签, value, oldValue);
+    // });
   // 更新用户界面的函数
   this.cb = cb;
   this.vm = vm;
@@ -30,12 +33,18 @@ Watcher.prototype = {
     var oldVal = this.value;
     if (value !== oldVal) {
       // 更新值
+      // watcher.value = value;
       this.value = value;
       // 更新用户界面
       this.cb.call(this.vm, value, oldVal);
+      // function (value, oldValue) {
+        //this=>this.vm value=>"hello Vue"  oldValue="hello MVVM"
+        //   updater["textUpdater"] && updater["textUpdater"](span标签, "hello Vue", "hello MVVM");
+        // }
     }
   },
   addDep: function (dep) {
+    // watcher.addDep(dep)
     // 1. 每次调用run()的时候会触发相应属性的getter
     // getter里面会触发dep.depend()，继而触发这里的addDep
     // 2. 假如相应属性的dep.id已经在当前watcher的depIds里，说明不是一个新的属性，仅仅是改变了其值而已
@@ -60,6 +69,14 @@ Watcher.prototype = {
       // 有什么用？ 防止dep重复保存watcher
       this.depIds[dep.id] = dep;
     }
+    // if (!{}.hasOwnProperty(0)) {
+    //   // 在dep中保存watcher
+    //   // 有什么用？将来数据发生变化，能通过dep找到所有watcher从而更新
+    //   dep.addSub(this);
+    //   // 在watcher中保存dep
+    //   // 有什么用？ 防止dep重复保存watcher
+    //   {}[0] = dep;
+    // }
   },
   get: function () {
     // 将Dep.target赋值为当前watcher
@@ -70,6 +87,7 @@ Watcher.prototype = {
   },
 
   parseGetter: function (exp) {
+    //exp => 'msg'
     if (/[^\w.$]/.test(exp)) return;
     // exp person.name
     // exps ['person', 'name']
@@ -78,10 +96,15 @@ Watcher.prototype = {
     // 就是this.getter
     // 类似于 this._getVMVal() 得到表达式的值
     return function getter(obj) {
+      // this.getter.call(this.vm, this.vm)
+      //obj->_data
       for (var i = 0, len = exps.length; i < len; i++) {
         if (!obj) return;
         // 读取属性 --> 触发数据代理的get --> 触发数据劫持的get
         obj = obj[exps[i]];
+        //obj = _data['msg']
+        //第一次进入obj = _data['person'];
+        //第二次进入obj = _data['person']['name'];
       }
       return obj;
     };

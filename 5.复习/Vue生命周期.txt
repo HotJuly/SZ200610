@@ -1,0 +1,21 @@
+1.初始化阶段
+beforeCreate
+created
+beforeMount
+mounted
+
+2.更新阶段
+beforeUpdate
+updated
+
+3.卸载阶段
+beforeDestory
+destoryed
+
+
+keep-alive组件
+activated
+deactivated
+
+收集子孙组件报错信息
+errorCaptured	->	Vue.option.errorHandle=

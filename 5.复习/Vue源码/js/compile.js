@@ -14,6 +14,7 @@ function Compile(el, vm) {
     // 1. 将元素节点转换成文档碎片节点
     this.$fragment = this.node2Fragment(this.$el);
     // 2. 解析模板（解析插值语法和指令语法）
+    //beforeMount()
     this.init();
     // 3. 将模板解析后的文档碎片节点添加到el容器中生效
     this.$el.appendChild(this.$fragment);
@@ -48,7 +49,7 @@ Compile.prototype = {
 
     // 将所有子节点转换成真数组进行遍历
     //slice可以进行数组的浅克隆,也可以将伪数组转成真数组
-    //childNodes=>[<p>{{msg}}</p>]
+    //childNodes=>[<p>{{msg}}</p>,<span>...</span>]
     [].slice.call(childNodes).forEach(function (node) {
       // 提取当前节点的文本内容
       //text=>{{msg}}
@@ -71,6 +72,7 @@ Compile.prototype = {
 
       // 判断当前节点是否还有子节点，如果有，就递归编译所有子节点
       if (node.childNodes && node.childNodes.length) {
+        // p.childNodes.length>0
         me.compileElement(node);
       }
     });
@@ -99,8 +101,10 @@ Compile.prototype = {
       // 判断当前属性是否是指令属性，如果是就要解析，如果不是就啥也不管
       if (me.isDirective(attrName)) {
         // 获取属性值 --> 指令表达式 handleClick
+        //attr->v-text  ->exp=>  "msg"
         var exp = attr.value;
         // 截取2位得到 on:click
+        //v-text  ->  dir=>text
         var dir = attrName.substring(2);
         // 判断是否是事件指令 v-on
         if (me.isEventDirective(dir)) {
@@ -108,6 +112,8 @@ Compile.prototype = {
           compileUtil.eventHandler(node, me.$vm, exp, dir);
           // 普通指令 v-text v-html v-class v-model
         } else {
+          //dir->text
+          // compileUtil['text'] && compileUtil['text'](span标签, vm实例, 'msg');
           compileUtil[dir] && compileUtil[dir](node, me.$vm, exp);
         }
 
@@ -145,6 +151,7 @@ Compile.prototype = {
 var compileUtil = {
   // v-text 和 插值语法
   text: function (node, vm, exp) {
+    // compileUtil['text'](span标签, vm实例, 'msg')
     this.bind(node, vm, exp, "text");
   },
   // v-html
@@ -178,11 +185,14 @@ var compileUtil = {
   // exp 表达式
   // dir text
   bind: function (node, vm, exp, dir) {
+    // this.bind(span标签, vm实例, 'msg', "text");
     // 取出更新函数 textUpdater
+    // var updaterFn = updater["textUpdater"];
     var updaterFn = updater[dir + "Updater"];
 
     // this._getVMVal(vm, exp) 获取表达式的值
     // 调用更新函数 textUpdater 来更新节点内容
+    //updaterFn(span标签, "hello MVVM");vm.msg->vm._data.msg
     updaterFn && updaterFn(node, this._getVMVal(vm, exp));
 
     // 所有指令（除了事件指令）和插值语法都有watcher
@@ -190,6 +200,9 @@ var compileUtil = {
     new Watcher(vm, exp, function (value, oldValue) {
       updaterFn && updaterFn(node, value, oldValue);
     });
+    // new Watcher(vm,'msg', function (value, oldValue) {
+    //   updater["textUpdater"] && updater["textUpdater"](span标签, value, oldValue);
+    // });
   },
 
   // 事件处理
@@ -252,7 +265,10 @@ var compileUtil = {
 
 var updater = {
   textUpdater: function (node, value) {
+    //updaterFn(span标签, "hello MVVM")
     // 将节点的文本内容，赋值成表达式的值
+    // span.textContent = typeof "hello MVVM" == "undefined" ? "" : "hello MVVM";
+    // span.textContent = "hello MVVM";
     node.textContent = typeof value == "undefined" ? "" : value;
   },
 
