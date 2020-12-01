@@ -1,50 +1,67 @@
 <template>
   <div class="hello">
-    <h1>{{ count }}</h1>
-    <h2>{{ double }}</h2>
-    <h2>{{ three }}</h2>
-    <button @click="changeCount">+1</button>
+    <h1>{{ msg }}</h1>
+    <span>clientX:{{x}}</span>
+    <span>clientY:{{y}}</span>
+    <button @click="changeMsg">+1</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent , ref , computed  } from 'vue';
+import { defineComponent , onBeforeMount, onBeforeUpdate, onMounted, onUpdated, ref } from 'vue';
+import useMousePosition from '../hooks/useMousePosition';
 
 export default defineComponent({
   name: 'HelloWorld',
   setup(){
-    const count = ref(0);
 
-    const double = computed(()=>{
-      return count.value * 2
+    const {x,y} =useMousePosition()
+
+    const msg = ref(0);
+
+    const changeMsg = () => {
+      msg.value++;
+    };
+
+
+    onBeforeMount(()=>{
+      console.log('onBeforeMount')
+    });
+
+    onMounted(()=>{
+      console.log('onMounted')
+    });
+
+    onBeforeUpdate(()=>{
+      console.log('onBeforeUpdate')
+    });
+
+    onUpdated(()=>{
+      console.log('onUpdated')
     })
 
-    const three = computed({
-      get(){
-        return count.value * 3;
-      },
-      set(newValue: number){
-        console.log(newValue);
-        count.value = newValue;
-      }
-    })
-    // three=3;
-    // count=3;
-
-  
-    const changeCount = () => {
-      count.value++;
-      setTimeout(()=>{
-        three.value +=2;
-      },2000)
-    }
 
     return {
-      changeCount,
-      count,
-      double,
-      three
+      changeMsg,
+      msg,
+      x,
+      y
     }
+  },
+  beforeMount(){
+    console.log('beforeMount')
+  },
+  mounted(){
+   
+    console.log('mounted')
+  },
+  beforeUpdate(){
+    console.log('beforeUpdate')
+  },
+  updated(){
+    console.log('updated')
+  },
+  beforeUnmount(){
   }
 });
 </script>

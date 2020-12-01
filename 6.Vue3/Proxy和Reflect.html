@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data={
+            msg:123,
+            name:"haha"
+        }
+
+        let proxyData = new Proxy(data,{
+            get(target,prop){
+                console.log("Proxy get")
+                return Reflect.get(target,prop);
+            },
+            set(target,prop,value){
+                //.......递归创建代理对象
+                console.log("Proxy set")
+                Reflect.set(target,prop,value)
+            },
+            deleteProperty(target,prop){
+                //...刷新视图,重新渲染
+                console.log("Proxy delete")
+                Reflect.deleteProperty(target,prop)
+            },
+            defineProperty(target,prop,value){
+                console.log(target,prop,value)
+                Reflect.defineProperty(target,prop,value)
+                return true;
+            }
+        })
+
+        proxyData.msg=222
+        delete proxyData.name
+        // proxyData.mmm="22223333"
+        Object.defineProperty(proxyData,'mmm',{
+            configurable:true,
+            enumerable:true,
+            value:"222333"
+        })
+        console.log(proxyData,data)
+    </script>
+</body>
+</html>

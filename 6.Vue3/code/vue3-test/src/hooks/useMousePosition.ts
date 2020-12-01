@@ -1,0 +1,28 @@
+/* 
+自定义hooks: 收集用户鼠标点击的页面坐标
+*/
+import { ref, onMounted, onUnmounted } from 'vue'
+
+export default function useMousePosition () {
+  // 初始化坐标数据
+  const x = ref(-1)
+  const y = ref(-1)
+
+  // 用于收集点击事件坐标的函数
+  const updatePosition = (e: MouseEvent) => {
+    x.value = e.clientX
+    y.value = e.clientY
+  }
+
+  // 挂载后绑定点击监听
+  onMounted(() => {
+    document.addEventListener('click', updatePosition)
+  })
+
+  // 卸载前解绑点击监听
+  onUnmounted(() => {
+    document.removeEventListener('click', updatePosition)
+  })
+
+  return {x, y}
+}
