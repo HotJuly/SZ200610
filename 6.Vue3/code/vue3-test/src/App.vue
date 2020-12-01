@@ -1,33 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <h1>{{msg}}</h1>
-  <h2 v-for="item in arr" :key="item">{{item}}</h2>
-  <button @click="pushStr">添加元素</button>
-  <button @click="setMsg">+1</button>
-
-  <!-- <div>{{person.name}}</div>
-  <div>{{person.age}}</div> -->
-
-  <div>{{name}}</div>
-  <div>{{age}}</div>
-  <button @click="addAge">新增名字</button>
-  <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
+  <div>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <About/>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent , ref , reactive } from 'vue';
-// import HelloWorld from './components/HelloWorld.vue';
+import About from './components/About.vue';
 
-interface Person {
-  name: string;
-  age?: number;
-}
 
 export default defineComponent({
   name: 'App',
-  // components: {
-  //   HelloWorld
-  // },
+  components: {
+    About
+  },
   // data(){},
   // created(){
   //   console.log(this)
@@ -58,18 +45,18 @@ export default defineComponent({
       arr[2]="666"
     }
 
-    const person: Person  = reactive({
-      name:'xiaoming'
-    })
+    // const person: Person  = reactive({
+    //   name:'xiaoming'
+    // })
 
-    const addAge = () => {
-      if(person.age){
-        person.age++;
-      }else{
-        //如果是Vue2.0,后期想要新增响应式属性,必须使用Vue.set,但是Vue3.0中自动监视后续新增属性
-        person.age = 18;
-      }
-    }
+    // const addAge = () => {
+    //   if(person.age){
+    //     person.age++;
+    //   }else{
+    //     //如果是Vue2.0,后期想要新增响应式属性,必须使用Vue.set,但是Vue3.0中自动监视后续新增属性
+    //     person.age = 18;
+    //   }
+    // }
 
 
     return {
@@ -78,7 +65,7 @@ export default defineComponent({
       arr,
       pushStr,
       // ...person,
-      addAge
+      // addAge
     }
   }
 });
