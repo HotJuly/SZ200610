@@ -439,7 +439,7 @@ new Proxy(data, {
 **// 2.0中为 beforeDestroy 和 destroyed**
 
 - **beforeUnmount -> onBeforeUnmount**
-- **mounted -> onUnmounted**
+- **unmounted -> onUnmounted**
 
 // 用于处理错误
 
